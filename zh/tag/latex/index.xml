@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>LaTex | Thallium54</title><link>https://tgc54.com/zh/tag/latex/</link><atom:link href="https://tgc54.com/zh/tag/latex/index.xml" rel="self" type="application/rss+xml"/><description>LaTex</description><generator>Wowchemy (https://wowchemy.com)</generator><language>zh-Hans</language><lastBuildDate>Sat, 05 Mar 2022 19:39:39 -0500</lastBuildDate><image><url>https://tgc54.com/media/icon_hu423b19687c85b10febae54029c442fbf_4135_512x512_fill_lanczos_center_3.png</url><title>LaTex</title><link>https://tgc54.com/zh/tag/latex/</link></image><item><title>在LuaTex/LuaLaTex使用中文，附Font KaitiSC not found.解决方法</title><link>https://tgc54.com/zh/post/luatex-chinese-guide/</link><pubDate>Sat, 05 Mar 2022 19:39:39 -0500</pubDate><guid>https://tgc54.com/zh/post/luatex-chinese-guide/</guid><description>&lt;p>如果是中文文档的话可以用ctex包：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-latex" data-lang="latex">&lt;span class="line">&lt;span class="cl">&lt;span class="k">\usepackage&lt;/span>&lt;span class="nb">{&lt;/span>ctex&lt;span class="nb">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">\setCJKmainfont&lt;/span>&lt;span class="nb">{&lt;/span>Source Han Sans SC&lt;span class="nb">}&lt;/span> &lt;span class="c">% 设置默认中文字体
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c">&lt;/span>&lt;span class="k">\setCJKfamilyfont&lt;/span>&lt;span class="nb">{&lt;/span>songti&lt;span class="nb">}{&lt;/span>FZShuSong-Z01S&lt;span class="nb">}&lt;/span> &lt;span class="c">% 设置默认宋体字体
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c">% 上面的songti也可以换成别的，默认定义了songti、heiti、fangsong
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">\begin&lt;/span>&lt;span class="nb">{&lt;/span>document&lt;span class="nb">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">使用默认字体
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">{&lt;/span>&lt;span class="k">\heiti&lt;/span> 使用特定字体&lt;span class="nb">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">\end&lt;/span>&lt;span class="nb">{&lt;/span>document&lt;span class="nb">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果只加入少量中文的话可以直接调用中文字体：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-latex" data-lang="latex">&lt;span class="line">&lt;span class="cl">&lt;span class="k">\usepackage&lt;/span>&lt;span class="nb">{&lt;/span>fontspec&lt;span class="nb">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">\newfontfamily&lt;/span>&lt;span class="nb">{&lt;/span>&lt;span class="k">\han&lt;/span>&lt;span class="nb">}{&lt;/span>Source Han Sans SC&lt;span class="nb">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">\begin&lt;/span>&lt;span class="nb">{&lt;/span>document&lt;span class="nb">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">{&lt;/span>&lt;span class="k">\han&lt;/span> 中文&lt;span class="nb">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">\end&lt;/span>&lt;span class="nb">{&lt;/span>document&lt;span class="nb">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>附：macOS下“The font &amp;ldquo;KaitiSC&amp;rdquo; cannot be found.”解决方案&lt;/p>
+&lt;p>详细情况请看&lt;a href="https://zhuanlan.zhihu.com/p/42434849" target="_blank" rel="noopener">原文&lt;/a>, Monterey下执行&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">sudo tlmgr conf texmf OSFONTDIR /System/Library/AssetsV2/com_apple_MobileAsset_Font7
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

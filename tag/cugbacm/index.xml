@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>CUGBACM | Thallium54</title><link>https://tgc54.com/tag/cugbacm/</link><atom:link href="https://tgc54.com/tag/cugbacm/index.xml" rel="self" type="application/rss+xml"/><description>CUGBACM</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 14 Oct 2019 00:00:00 +0000</lastBuildDate><image><url>https://tgc54.com/media/icon_hu423b19687c85b10febae54029c442fbf_4135_512x512_fill_lanczos_center_3.png</url><title>CUGBACM</title><link>https://tgc54.com/tag/cugbacm/</link></image><item><title>Solution for CUGBACM Training</title><link>https://tgc54.com/post/cugb8/</link><pubDate>Mon, 14 Oct 2019 00:00:00 +0000</pubDate><guid>https://tgc54.com/post/cugb8/</guid><description>&lt;p>&lt;a href="https://codeforces.com/gym/101498/problems" target="_blank" rel="noopener">Link&lt;/a>&lt;/p>
+&lt;h1 id="a---watching-tv-gym---101498a">A - Watching TV Gym - 101498A&lt;/h1>
+&lt;p>Use a &lt;code>map&amp;lt;int,int&amp;gt;&lt;/code> to count the number of channels in each frequency. Iterate the map to find the frequency that displays the largest number of channels.&lt;/p>
+&lt;h1 id="b---longest-prefix-gym---101498b">B - Longest Prefix Gym - 101498B&lt;/h1>
+&lt;p>Swapping any two letters means that you can rearrange the second string so just count the number of each character in the second string and then iterate the first string to see if you can put the same in each position. When you stops, that&amp;rsquo;s the longest prefix.&lt;/p>
+&lt;h1 id="c---lunch-break-gym---101498c">C - Lunch Break Gym - 101498C&lt;/h1>
+&lt;p>Just output which one is the smallest among the three numbers&lt;/p>
+&lt;h1 id="d---counting-paths-gym---101498d">D - Counting Paths Gym - 101498D&lt;/h1>
+&lt;p>The first direction can be chosen arbitrarily. In the rest $a-1$ nodes we need to choose $b$ nodes where to change the direction so the answer is $\dbinom{a-1}{b}\pmod {10^9+7}$. As the $a$ and $b$ are large so we need to precalculate $n!\pmod {10^9+7}$ and $(n!)^{-1}\pmod {10^9+7}$ .&lt;/p>
+&lt;h1 id="e---car-factory-gym---101498e">E - Car Factory Gym - 101498E&lt;/h1>
+&lt;p>By drawing some sketchs you can find the answer is $n+k-1$.&lt;/p>
+&lt;h1 id="h---palindrome-number">H - Palindrome Number&lt;/h1>
+&lt;p>Start from the first digit and try to fill every digits with the largest number. If the sum is less than $s$ or there is leading zero, the answer is -1 otherwise output the constructed number.&lt;/p>
+&lt;h1 id="i---rock-piles-gym---101498i">I - Rock Piles Gym - 101498I&lt;/h1>
+&lt;p>At first I counldn&amp;rsquo;t find any pattern so I decided to get the sg function using brute force. Here is the pattern: only when both $N$ and $M$ are even the answer is &amp;ldquo;abdullah&amp;rdquo; otherwise the answer is hasan.&lt;/p>
+&lt;h1 id="j---split-the-string-gym---101498j">J - Split the String Gym - 101498J&lt;/h1>
+&lt;p>Enumerate all the possible disstance between two splitting point and check if all the splitting points are space. If you could find such a distance the answer is &amp;ldquo;YES&amp;rdquo; and vise versa.&lt;/p></description></item></channel></rss>
