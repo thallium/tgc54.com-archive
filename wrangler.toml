@@ -1,9 +1,0 @@
-name = "blog"
-type = "webpack"
-route = 'tgc54.com/*'
-zone_id = '864d5056867a566149328d073ff10b44'
-usage_model = ''
-compatibility_flags = []
-workers_dev = false
-site = {bucket = "public",entry-point = "workers-site"}
-compatibility_date = "2022-04-26"
