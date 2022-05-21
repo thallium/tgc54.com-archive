@@ -2,6 +2,15 @@
   padding: 60px 0 60px 0;
 }
 
+p, ul, ol {
+    line-height: 1.7;
+}
+
+.navbar {
+    font-size: 0.9rem;
+    height: 55px;
+}
+
 /* collapsible block */
 .collapsible__button {
   background-color: rgba(68, 138, 255, 0.1);

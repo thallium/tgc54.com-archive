@@ -16,6 +16,9 @@ main:
   - name: Tags
     url: '/tag'
     weight: 40
+  - name: Wiki
+    url: 'https://wiki.tgc54.com/en/'
+    weight: 50
 
 
 # Link to a PDF of your resume/CV from the menu.

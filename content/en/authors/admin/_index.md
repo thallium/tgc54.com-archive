@@ -10,6 +10,7 @@ role: Computer Science Student
 
 # Organizations/Affiliations to show in About widget
 organizations:
+  - name: IBM Canada
   - name: York University
     url: https://yorku.ca/
 
@@ -24,7 +25,7 @@ education:
   courses:
     - course: B.Sc., Hons. Computer Science
       institution: York University
-      year: 2019-now
+      year: 2019 - 2023
 
 # Social/Academic Networking
 # For available icons, see: https://wowchemy.com/docs/getting-started/page-builder/#icons
@@ -55,6 +56,10 @@ email: ''
 highlight_name: true
 ---
 
-Hi, I’m Gengchen Tuo,  also known online as @Thallium54. I’m a CS student at York University. I’m into all the tech things: software development, home server, Linux... I’m also a competitive programming enthusiast. Some of my other hobbies: Rubik’s cube, (ergonomic) mechanical keyboard, table tennis.
-
-<!-- {{< icon name="download" pack="fas" >}} Download my {{< staticref "uploads/demo_resume.pdf" "newtab" >}}resumé{{< /staticref >}}. -->
+- Also known online as @Thallium54
+- Back End Developer intern @ IBM
+- CS student @ York University
+- Tech things that I enjoy: software development, home server, Linux...
+- Competitive programming enthusiast
+- Some of my other hobbies: Rubik’s cube, custom (ergonomic) mechanical keyboard, table tennis.
+- Languages: C/C++, Python, Go, JS, Java, Lua

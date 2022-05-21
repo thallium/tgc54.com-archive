@@ -28,6 +28,9 @@ social:
   - icon: github
     icon_pack: fab
     link: https://github.com/thallium
+  - icon: book
+    icon_pack: fas
+    link: https://wiki.tgc54.com/
 
 # Link to a PDF of your resume/CV.
 # To use: copy your resume to `static/uploads/resume.pdf`, enable `ai` icons in `params.toml`,
@@ -40,8 +43,6 @@ email: ''
 highlight_name: true
 ---
 
-喜欢各种东西：开发、服务器、Linux、算法竞赛、魔方、机械键盘、乒乓球。
-
-[Thallium54](https://codeforces.com/profile/Thallium54)@codeforces
-
-[种辣条](https://space.bilibili.com/3019370)@bilibili
+- 喜欢各种东西：开发、服务器、Linux、算法竞赛、魔方、机械键盘、乒乓球。
+- [Thallium54](https://codeforces.com/profile/Thallium54) @ Codeforces
+- [种辣条](https://space.bilibili.com/3019370) @ bilibili
