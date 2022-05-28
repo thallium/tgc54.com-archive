@@ -12,3 +12,5 @@ go.sum
 **/.DS_Store
 workers-site/
 wrangler.toml
+
+.editorconfig
