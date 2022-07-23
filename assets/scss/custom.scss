@@ -1,13 +1,3 @@
-@font-face {
-    font-family: "Noto Sans Custom";
-    src: local('Noto Sans SC');
-    unicode-range: U+0-2017, U+2019-10FFFF;
-}
-@font-face {
-    font-family: "Noto Sans Custom";
-    src: local('Noto Sans JP');
-    unicode-range: U+2018-2019;
-}
 .home-section {
   padding: 60px 0 60px 0;
 }
@@ -21,7 +11,7 @@ p, ul, ol {
 }
 
 body {
-    font-feature-settings: "pwid";
+    font-family: "Inter", "Noto Sans SC";
 }
 
 .navbar {
