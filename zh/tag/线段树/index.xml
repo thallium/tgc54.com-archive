@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>线段树 | Thallium54</title><link>thallium.github.io/tgc54.com/zh/tag/%E7%BA%BF%E6%AE%B5%E6%A0%91/</link><atom:link href="thallium.github.io/tgc54.com/zh/tag/%E7%BA%BF%E6%AE%B5%E6%A0%91/index.xml" rel="self" type="application/rss+xml"/><description>线段树</description><generator>Wowchemy (https://wowchemy.com)</generator><language>zh-Hans</language><lastBuildDate>Wed, 28 Jul 2021 13:23:29 -0300</lastBuildDate><image><url>/thallium.github.io/tgc54.com/media/icon_hu423b19687c85b10febae54029c442fbf_4135_512x512_fill_lanczos_center_3.png</url><title>线段树</title><link>thallium.github.io/tgc54.com/zh/tag/%E7%BA%BF%E6%AE%B5%E6%A0%91/</link></image><item><title>AtCoder Regular Contest (ARC) 076F - Exhausted? 题解</title><link>thallium.github.io/tgc54.com/zh/post/arc076d/</link><pubDate>Wed, 28 Jul 2021 13:23:29 -0300</pubDate><guid>thallium.github.io/tgc54.com/zh/post/arc076d/</guid><description>&lt;h2 id="前置知识霍尔定理halls-theorem">前置知识：霍尔定理（Hall&amp;rsquo;s Theorem)&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>线段树 | Thallium54</title><link>https://thallium.github.io/tgc54.com/zh/tag/%E7%BA%BF%E6%AE%B5%E6%A0%91/</link><atom:link href="https://thallium.github.io/tgc54.com/zh/tag/%E7%BA%BF%E6%AE%B5%E6%A0%91/index.xml" rel="self" type="application/rss+xml"/><description>线段树</description><generator>Wowchemy (https://wowchemy.com)</generator><language>zh-Hans</language><lastBuildDate>Wed, 28 Jul 2021 13:23:29 -0300</lastBuildDate><image><url>https://thallium.github.io/tgc54.com/media/icon_hu423b19687c85b10febae54029c442fbf_4135_512x512_fill_lanczos_center_3.png</url><title>线段树</title><link>https://thallium.github.io/tgc54.com/zh/tag/%E7%BA%BF%E6%AE%B5%E6%A0%91/</link></image><item><title>AtCoder Regular Contest (ARC) 076F - Exhausted? 题解</title><link>https://thallium.github.io/tgc54.com/zh/post/arc076d/</link><pubDate>Wed, 28 Jul 2021 13:23:29 -0300</pubDate><guid>https://thallium.github.io/tgc54.com/zh/post/arc076d/</guid><description>&lt;h2 id="前置知识霍尔定理halls-theorem">前置知识：霍尔定理（Hall&amp;rsquo;s Theorem)&lt;/h2>
 &lt;p>也叫霍尔结婚定理(Hall&amp;rsquo;s marriage theorem)。在二分图中，令两部分点集分别为$X, Y$, 则存在$X-$完美匹配（$X$中的点集全部被匹配）的充分必要条件是:对于$X$的任意子集$W$,$|W|\le|\Gamma(W)|$，其中$\Gamma(W)$为与$W$直接相连的点的集合。&lt;/p>
 &lt;h2 id="题解">题解&lt;/h2>
 &lt;p>本题是让我们求最大匹配数，但直接跑匹配算法肯定不合适，此时我们考虑霍尔定理：假设所有人的集合为$X$,我们至少还需要$\max_{W\subseteq X}|W|-|\Gamma(W)|$。但是$X$的子集的个数是指数级的所以不能直接考虑子集。&lt;/p>
@@ -102,7 +102,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cout&lt;/span> &lt;span class="o">&amp;lt;&amp;lt;&lt;/span> &lt;span class="n">ans&lt;/span> &lt;span class="o">&amp;lt;&amp;lt;&lt;/span> &lt;span class="sc">&amp;#39;\n&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>CodeForces 1539F - Strange Array 题解</title><link>thallium.github.io/tgc54.com/zh/post/cf1539f/</link><pubDate>Sun, 20 Jun 2021 11:02:09 -0400</pubDate><guid>thallium.github.io/tgc54.com/zh/post/cf1539f/</guid><description>&lt;p>&lt;a href="https://codeforces.com/contest/1539/problem/F" target="_blank" rel="noopener">题目链接&lt;/a>&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>CodeForces 1539F - Strange Array 题解</title><link>https://thallium.github.io/tgc54.com/zh/post/cf1539f/</link><pubDate>Sun, 20 Jun 2021 11:02:09 -0400</pubDate><guid>https://thallium.github.io/tgc54.com/zh/post/cf1539f/</guid><description>&lt;p>&lt;a href="https://codeforces.com/contest/1539/problem/F" target="_blank" rel="noopener">题目链接&lt;/a>&lt;/p>
 &lt;p>思路不难但线段树维护的内容需要一定的技巧。&lt;/p>
 &lt;h2 id="题解">题解&lt;/h2>
 &lt;p>首先我们看如何取l和r才能使得答案最大。如果$l=r=i$的话，$a_i$在正中间，如果加入一个小于等于$a_i$的数会让$a_i$往右偏，反之，加入大于等于的数会往左偏，所以设[l, r]中大于 $a_i$ 的数的个数为$x$，小于$a_i$的数的个数为$y$，（等于$a_i$的数可以算入$x$或$y$其中之一）我们要调整$l,r$找到 $x-y$的最大和最小值（分别对应$a_i$在最左和最右）, 此时的答案为$\max(\frac{x-y+1}{2}, \frac{y-x}{2})$。由于$l, r$互相独立，所以我们可以分别看$[1, i], [i, n]$两个区间，找到$l\in[1, i], r\in [i, n]$, 使得$[l, i-1], [i+1, r]$中的$x-y$最大或最小。&lt;/p>
@@ -226,7 +226,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cout&lt;/span> &lt;span class="o">&amp;lt;&amp;lt;&lt;/span> &lt;span class="n">x&lt;/span> &lt;span class="o">&amp;lt;&amp;lt;&lt;/span> &lt;span class="sc">&amp;#39; &amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>题解 HDU6602 - Longest Subarray</title><link>thallium.github.io/tgc54.com/zh/post/hdu6602/</link><pubDate>Tue, 09 Jun 2020 00:00:00 +0000</pubDate><guid>thallium.github.io/tgc54.com/zh/post/hdu6602/</guid><description>&lt;p>&lt;a href="https://vjudge.net/problem/HDU-6602/origin" target="_blank" rel="noopener">link&lt;/a>&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>题解 HDU6602 - Longest Subarray</title><link>https://thallium.github.io/tgc54.com/zh/post/hdu6602/</link><pubDate>Tue, 09 Jun 2020 00:00:00 +0000</pubDate><guid>https://thallium.github.io/tgc54.com/zh/post/hdu6602/</guid><description>&lt;p>&lt;a href="https://vjudge.net/problem/HDU-6602/origin" target="_blank" rel="noopener">link&lt;/a>&lt;/p>
 &lt;h2 id="题解">题解&lt;/h2>
 &lt;p>让我们先尝试固定右端点，然后对于每个右端点找到最长的子数组。&lt;/p>
 &lt;p>令$ pos_ {x，i} $为第i个$x$的下标。假设当前的右端点是$ r \in [0，n）$，对于每个$ x \in [1，C] $,左端点不可能落在区间$ [pos_ {x，m-k + 1 } + 1，i] $，其中$ m $是直到$ r $为止$ x $的出现次数。这是因为如果左端点在这个区间内，则$ x $的出现将大于零且小于$ K $，不满足约束条件。我们可以在这些区间上加1，那么最左的端点是值为0的最小下标。&lt;/p>
@@ -315,7 +315,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Codeforces 1187D - Subarray Sorting 题解</title><link>thallium.github.io/tgc54.com/zh/post/cf1187d/</link><pubDate>Sat, 25 Apr 2020 00:00:00 +0000</pubDate><guid>thallium.github.io/tgc54.com/zh/post/cf1187d/</guid><description>&lt;h2 id="题解">题解&lt;/h2>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Codeforces 1187D - Subarray Sorting 题解</title><link>https://thallium.github.io/tgc54.com/zh/post/cf1187d/</link><pubDate>Sat, 25 Apr 2020 00:00:00 +0000</pubDate><guid>https://thallium.github.io/tgc54.com/zh/post/cf1187d/</guid><description>&lt;h2 id="题解">题解&lt;/h2>
 &lt;p>我们可以做的最小的操作就是只排序相邻的两个元素，也就是说交换$a_i$和$a_{i+1}$如果$a_i&amp;gt;a_{i+1}$。通过这种操作，我们可以把$a_i$挪到位置$j,j&amp;lt; i$，如果所有$i$到$j-1$的数都比$a_i$小的话。&lt;/p>
 &lt;p>明白了操作的本质之后我们就可以尝试从用a数组的数左往右构造b数组了。设当前的位置为$i$:&lt;/p>
 &lt;ol>
@@ -403,7 +403,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>HDU6278 - Just h-index 题解</title><link>thallium.github.io/tgc54.com/zh/post/hdu6278/</link><pubDate>Sat, 18 Apr 2020 00:00:00 +0000</pubDate><guid>thallium.github.io/tgc54.com/zh/post/hdu6278/</guid><description>&lt;p>主席树！&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>HDU6278 - Just h-index 题解</title><link>https://thallium.github.io/tgc54.com/zh/post/hdu6278/</link><pubDate>Sat, 18 Apr 2020 00:00:00 +0000</pubDate><guid>https://thallium.github.io/tgc54.com/zh/post/hdu6278/</guid><description>&lt;p>主席树！&lt;/p>
 &lt;h2 id="题解">题解&lt;/h2>
 &lt;p>用主席树我们可以知道在给定区间里的所有数的出现次数。我们可以比较容易的想到一个二分做法：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="n">l&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">r&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">INF&lt;/span>&lt;span class="p">;&lt;/span>
@@ -581,7 +581,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>HDU 5592 - ZYB's Premutation 题解</title><link>thallium.github.io/tgc54.com/zh/post/hdu5592/</link><pubDate>Sat, 29 Feb 2020 00:00:00 +0000</pubDate><guid>thallium.github.io/tgc54.com/zh/post/hdu5592/</guid><description>&lt;p>妙啊&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>HDU 5592 - ZYB's Premutation 题解</title><link>https://thallium.github.io/tgc54.com/zh/post/hdu5592/</link><pubDate>Sat, 29 Feb 2020 00:00:00 +0000</pubDate><guid>https://thallium.github.io/tgc54.com/zh/post/hdu5592/</guid><description>&lt;p>妙啊&lt;/p>
 &lt;p>&lt;a href="http://acm.hdu.edu.cn/showproblem.php?pid=5592" target="_blank" rel="noopener">Problem Link&lt;/a>&lt;/p>
 &lt;h1 id="题解">题解&lt;/h1>
 &lt;p>我们用$A$表示输入，用$P$表示答案。$A_i-A_{i-1}$就是比$P_i$大的数字的个数因此我们也能知道比$P_i$小的数的个数。我们可以用权值线段树然后从后遍历$A$，这样我们就能得到所有没用过的比$P_i$小的数的个数，然后在线段树中找到对应的数并更新线段树。&lt;/p>
@@ -628,7 +628,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Codeforces 1263E - Editor 题解</title><link>thallium.github.io/tgc54.com/zh/post/cf1263e/</link><pubDate>Sat, 30 Nov 2019 00:00:00 +0000</pubDate><guid>thallium.github.io/tgc54.com/zh/post/cf1263e/</guid><description>&lt;h1 id="解法">解法&lt;/h1>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Codeforces 1263E - Editor 题解</title><link>https://thallium.github.io/tgc54.com/zh/post/cf1263e/</link><pubDate>Sat, 30 Nov 2019 00:00:00 +0000</pubDate><guid>https://thallium.github.io/tgc54.com/zh/post/cf1263e/</guid><description>&lt;h1 id="解法">解法&lt;/h1>
 &lt;p>首先，我们需要知道几点正确匹配的括号序列的性质：&lt;/p>
 &lt;p>如果我们把左括号换成1，把右括号换成-1的话：&lt;/p>
 &lt;ol>
