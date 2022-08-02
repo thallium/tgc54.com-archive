@@ -1,15 +1,66 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Thallium54</title><link>https://tgc54.com/</link><atom:link href="https://tgc54.com/index.xml" rel="self" type="application/rss+xml"/><description>Thallium54</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sat, 01 Jun 2030 13:00:00 +0000</lastBuildDate><image><url>https://tgc54.com/media/icon_hu423b19687c85b10febae54029c442fbf_4135_512x512_fill_lanczos_center_3.png</url><title>Thallium54</title><link>https://tgc54.com/</link></image><item><title>Competitive Programming Parser</title><link>https://tgc54.com/project/cp-parser/</link><pubDate>Sun, 14 Nov 2021 00:00:00 +0000</pubDate><guid>https://tgc54.com/project/cp-parser/</guid><description/></item><item><title>Mirai-competitive-programming</title><link>https://tgc54.com/project/mirai-cp/</link><pubDate>Wed, 16 Mar 2022 00:00:00 +0000</pubDate><guid>https://tgc54.com/project/mirai-cp/</guid><description/></item><item><title>Example Talk</title><link>https://tgc54.com/talk/example-talk/</link><pubDate>Sat, 01 Jun 2030 13:00:00 +0000</pubDate><guid>https://tgc54.com/talk/example-talk/</guid><description>&lt;div class="alert alert-note">
-&lt;div>
-Click on the &lt;strong>Slides&lt;/strong> button above to view the built-in slides feature.
-&lt;/div>
-&lt;/div>
-&lt;p>Slides can be added in a few ways:&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Thallium54</title><link>https://tgc54.com/</link><atom:link href="https://tgc54.com/index.xml" rel="self" type="application/rss+xml"/><description>Thallium54</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Fri, 22 Jul 2022 22:45:35 -0400</lastBuildDate><image><url>https://tgc54.com/media/icon_hu423b19687c85b10febae54029c442fbf_4135_512x512_fill_lanczos_center_3.png</url><title>Thallium54</title><link>https://tgc54.com/</link></image><item><title>Competitive Programming Parser</title><link>https://tgc54.com/project/cp-parser/</link><pubDate>Sun, 14 Nov 2021 00:00:00 +0000</pubDate><guid>https://tgc54.com/project/cp-parser/</guid><description/></item><item><title>Mirai-competitive-programming</title><link>https://tgc54.com/project/mirai-cp/</link><pubDate>Wed, 16 Mar 2022 00:00:00 +0000</pubDate><guid>https://tgc54.com/project/mirai-cp/</guid><description/></item><item><title>Manage Python Version With Pyenv</title><link>https://tgc54.com/post/manage-python-with-pyenv/</link><pubDate>Fri, 22 Jul 2022 22:45:35 -0400</pubDate><guid>https://tgc54.com/post/manage-python-with-pyenv/</guid><description>&lt;p>There is problem managing python version with your package manager. An easy solution is to use &lt;a href="https://github.com/pyenv/pyenv" target="_blank" rel="noopener">pyenv&lt;/a>:&lt;/p>
+&lt;ol>
+&lt;li>Install pyenv with your package manager. For MacOS, it&amp;rsquo;s &lt;code>brew install pyenv&lt;/code>.&lt;/li>
+&lt;li>Install desired python version: &lt;code>pyenv install &amp;lt;version&amp;gt;&lt;/code>&lt;/li>
+&lt;li>Set global python version &lt;code>pyenv global &amp;lt;version&amp;gt;&lt;/code>&lt;/li>
+&lt;li>Set up your shell environment for Pyenv, for zsh, add this to your &lt;code>.zshrc&lt;/code>:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">export&lt;/span> &lt;span class="nv">PYENV_ROOT&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$HOME&lt;/span>&lt;span class="s2">/.pyenv&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">command&lt;/span> -v pyenv &amp;gt;/dev/null &lt;span class="o">||&lt;/span> &lt;span class="nb">export&lt;/span> &lt;span class="nv">PATH&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$PYENV_ROOT&lt;/span>&lt;span class="s2">/bin:&lt;/span>&lt;span class="nv">$PATH&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">eval&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="k">$(&lt;/span>pyenv init -&lt;span class="k">)&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Bundle C++ Code with Clang</title><link>https://tgc54.com/post/bundle-cpp-code/</link><pubDate>Fri, 22 Jul 2022 09:51:55 -0400</pubDate><guid>https://tgc54.com/post/bundle-cpp-code/</guid><description>&lt;p>As a competitive programmer, I always want to find a solution to avoid copy-and-pasting my algorithm library so I can write more complex code lol.&lt;/p>
+&lt;p>Inspired by &lt;a href="https://codeforces.com/profile/Egor" target="_blank" rel="noopener">Egor&lt;/a>&amp;rsquo;s rust bundler, I wondered is there something similar for C++? I remembered that I read &lt;a href="https://codeforces.com/blog/entry/77139" target="_blank" rel="noopener">this&lt;/a> long time ago then I spent some time finding that blog but it&amp;rsquo;s not a bundler and looks quite complicated. In the comment someone mentioned using the &lt;code>cpp&lt;/code> command which does the preprocessing work. As you may know, &lt;code>#include&lt;/code> is basically copy-and-paste so this actually sounds right, but the problem is that it also copies and pastes the standard library which is over 200k+ lines of code. So I dug a bit further to see if it&amp;rsquo;s possible to skip system header and found &lt;a href="https://stackoverflow.com/a/20889599" target="_blank" rel="noopener">this&lt;/a>, but it only works for clang which what I&amp;rsquo;m using so I didn&amp;rsquo;t look for a solution for gcc.&lt;/p>
+&lt;p>The command is:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">clang++ -I/your/path/to/library/ -E -P -nostdinc++ -nobuiltininc main.cpp &amp;gt; bundled.cpp
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Explanation:&lt;/p>
 &lt;ul>
-&lt;li>&lt;strong>Create&lt;/strong> slides using Wowchemy&amp;rsquo;s &lt;a href="https://wowchemy.com/docs/managing-content/#create-slides" target="_blank" rel="noopener">&lt;em>Slides&lt;/em>&lt;/a> feature and link using &lt;code>slides&lt;/code> parameter in the front matter of the talk file&lt;/li>
-&lt;li>&lt;strong>Upload&lt;/strong> an existing slide deck to &lt;code>static/&lt;/code> and link using &lt;code>url_slides&lt;/code> parameter in the front matter of the talk file&lt;/li>
-&lt;li>&lt;strong>Embed&lt;/strong> your slides (e.g. Google Slides) or presentation video on this page using &lt;a href="https://wowchemy.com/docs/writing-markdown-latex/" target="_blank" rel="noopener">shortcodes&lt;/a>.&lt;/li>
+&lt;li>&lt;code>-E&lt;/code> Only run the preprocessor&lt;/li>
+&lt;li>&lt;code>-P&lt;/code> Disable linemarker output in -E mode&lt;/li>
+&lt;li>&lt;code>-nostdinc++&lt;/code> Disable standard #include directories for the C++ standard library&lt;/li>
+&lt;li>&lt;code>-nobuiltininc&lt;/code> Disable builtin #include directories (may not be needed)&lt;/li>
 &lt;/ul>
-&lt;p>Further event details, including &lt;a href="https://wowchemy.com/docs/writing-markdown-latex/" target="_blank" rel="noopener">page elements&lt;/a> such as image galleries, can be added to the body of this page.&lt;/p></description></item><item><title>Solution to NAIPC2014 F - Gold Bandits</title><link>https://tgc54.com/post/kattis-goldbandits/</link><pubDate>Wed, 23 Jun 2021 20:28:27 -0400</pubDate><guid>https://tgc54.com/post/kattis-goldbandits/</guid><description>&lt;p>This problem is North American Invitational Programming Contest (NAIPC) 2014 F，&lt;a href="https://open.kattis.com/problems/goldbandits" target="_blank" rel="noopener">link to the problem&lt;/a>。&lt;/p>
+&lt;p>As &lt;code>#include&lt;/code> of system header isn&amp;rsquo;t preserved, you can add the system headers using another command and I made a shell function to do that:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">expand_cpp &lt;span class="o">()&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> clang++ -I/your/path/to/library/ -E -P -nostdinc++ -nobuiltininc &lt;span class="nv">$1&lt;/span> &amp;gt; bundled.cpp
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> gsed -i &lt;span class="s2">&amp;#34;1s/^/#include &amp;lt;bits\/stdc++.h&amp;gt;\n/&amp;#34;&lt;/span> bundled.cpp
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Fast Static Website Deployment with Cloudflare Workers and Pages</title><link>https://tgc54.com/post/cloudflare-workers-and-pages/</link><pubDate>Sat, 21 May 2022 09:15:41 -0400</pubDate><guid>https://tgc54.com/post/cloudflare-workers-and-pages/</guid><description>&lt;p>If you are developing a simple static website like a blog or wiki, you probably don&amp;rsquo;t really like to play with a hosting service involving a remote repository like GitHub pages. Pushing to the remote repo every time you make changes and waiting for the building process is not that pleasant. With Cloudflare Workers/Pages, you can upload your website directly using &lt;a href="https://developers.cloudflare.com/workers/wrangler/get-started/" target="_blank" rel="noopener">Wrangler&lt;/a>.&lt;/p>
+&lt;h2 id="installation">Installation&lt;/h2>
+&lt;p>Install Wrangler globally:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">npm install -g wrangler
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="authentication">Authentication&lt;/h2>
+&lt;p>There are two ways of authentication:&lt;/p>
+&lt;ol>
+&lt;li>If you are using it on your own computer, you can use OAuth in your browser to login by running &lt;code>wrangler login&lt;/code>.&lt;/li>
+&lt;li>set &lt;code>CLOUDFLARE_API_TOKEN&lt;/code> and &lt;code>CLOUDFLARE_ACCOUNT_ID&lt;/code> environmental variables.
+&lt;ul>
+&lt;li>API token can be generated &lt;a href="https://dash.cloudflare.com/profile/api-tokens" target="_blank" rel="noopener">here&lt;/a>
+&lt;ul>
+&lt;li>for workers, you can use the &amp;ldquo;Edit Cloudflare Workers&amp;rdquo; template.&lt;/li>
+&lt;li>for pages, follow the offical guice &lt;a href="https://developers.cloudflare.com/pages/how-to/use-direct-upload-with-continuous-integration/#generate-an-api-token" target="_blank" rel="noopener">here&lt;/a>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>To find your account ID, log in to the Cloudflare dashboard &amp;gt; select your zone in Account Home &amp;gt; find your account ID in Overview under &lt;strong>API&lt;/strong> on the right-side menu.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="cloudflare-workers">Cloudflare Workers&lt;/h2>
+&lt;p>Cloudflare Worker is flexible and powerful. You can do much more than hosting website. You websites are stored in the KV storage.&lt;/p>
+&lt;p>To deploy your website:&lt;/p>
+&lt;ol>
+&lt;li>copy &lt;a href="https://github.com/cloudflare/worker-sites-template/blob/wrangler2/wrangler.toml" target="_blank" rel="noopener">wrangler.toml&lt;/a> to your project directory.
+&lt;ul>
+&lt;li>change &lt;code>bucket&lt;/code> to your website directory, e.g. &lt;code>public&lt;/code> folder for a hugo website.&lt;/li>
+&lt;li>optionally, add &lt;code>route = &amp;quot;your-domain.com/*&amp;quot;&lt;/code> to set custom domain/route for your website.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>create &lt;code>src&lt;/code> folder and copy &lt;a href="https://github.com/cloudflare/worker-sites-template/blob/wrangler2/src/index.js" target="_blank" rel="noopener">index.js&lt;/a>&lt;/li>
+&lt;li>in the &lt;code>src&lt;/code> folder, run &lt;code>npm i @cloudflare/kv-asset-handler&lt;/code>&lt;/li>
+&lt;li>finally, back to the folder where you put &lt;code>wrangler.toml&lt;/code>, run &lt;code>wrangler publish&lt;/code> to deploy your website.&lt;/li>
+&lt;/ol>
+&lt;h2 id="cloudflare-pages">Cloudflare Pages&lt;/h2>
+&lt;p>Cloudflare Pages is meant to replace the website hosting functionality of Workers. It supports lots of front-end framework so you can deploy your front-end application very easily. You can still upload locally with &lt;code>wrangler&lt;/code> but it doesn&amp;rsquo;t work that well (it failed to upload my hugo blog).&lt;/p>
+&lt;p>The upload is pretty easy: simple run &lt;code>wrangler pages publish &amp;lt;directory&amp;gt;&lt;/code> and follow the instruction.&lt;/p></description></item><item><title>Solution to NAIPC2014 F - Gold Bandits</title><link>https://tgc54.com/post/kattis-goldbandits/</link><pubDate>Wed, 23 Jun 2021 20:28:27 -0400</pubDate><guid>https://tgc54.com/post/kattis-goldbandits/</guid><description>&lt;p>This problem is North American Invitational Programming Contest (NAIPC) 2014 F，&lt;a href="https://open.kattis.com/problems/goldbandits" target="_blank" rel="noopener">link to the problem&lt;/a>。&lt;/p>
 &lt;h2 id="solution">Solution&lt;/h2>
 &lt;p>As n is small, we can consider brute force each shortest path. Then let&amp;rsquo;s rephrase the problem: we first take the gold from all the village on the path to the castle, then we return it if we go through a village that we steal before when returning to home. Then finding the returning path becomes a shortest path problem: the cost of the vertex $i$ is $a_i$ if we steal it before, is 0 otherwise.&lt;/p>
 &lt;h2 id="code">Code&lt;/h2>
@@ -490,61 +541,7 @@ $$dp_{k\cdot i+1}\coloneqq \max(dp_{k\cdot i+1}, dp_i+1), k=2,3,\dots$$&lt;/p>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cout&lt;/span>&lt;span class="o">&amp;lt;&amp;lt;&lt;/span>&lt;span class="n">ans&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Welcome to Wowchemy, the website builder for Hugo</title><link>https://tgc54.com/post/getting-started/</link><pubDate>Sun, 13 Dec 2020 00:00:00 +0000</pubDate><guid>https://tgc54.com/post/getting-started/</guid><description>&lt;h2 id="overview">Overview&lt;/h2>
-&lt;ol>
-&lt;li>The Wowchemy website builder for Hugo, along with its starter templates, is designed for professional creators, educators, and teams/organizations - although it can be used to create any kind of site&lt;/li>
-&lt;li>The template can be modified and customised to suit your needs. It&amp;rsquo;s a good platform for anyone looking to take control of their data and online identity whilst having the convenience to start off with a &lt;strong>no-code solution (write in Markdown and customize with YAML parameters)&lt;/strong> and having &lt;strong>flexibility to later add even deeper personalization with HTML and CSS&lt;/strong>&lt;/li>
-&lt;li>You can work with all your favourite tools and apps with hundreds of plugins and integrations to speed up your workflows, interact with your readers, and much more&lt;/li>
-&lt;/ol>
-&lt;figure id="figure-the-template-is-mobile-first-with-a-responsive-design-to-ensure-that-your-site-looks-stunning-on-every-device">
-&lt;div class="d-flex justify-content-center">
-&lt;div class="w-100" >&lt;img src="https://raw.githubusercontent.com/wowchemy/wowchemy-hugo-modules/master/academic.png" alt="The template is mobile first with a responsive design to ensure that your site looks stunning on every device." loading="lazy" data-zoomable />&lt;/div>
-&lt;/div>&lt;figcaption>
-The template is mobile first with a responsive design to ensure that your site looks stunning on every device.
-&lt;/figcaption>&lt;/figure>
-&lt;h2 id="get-started">Get Started&lt;/h2>
-&lt;ul>
-&lt;li>👉 &lt;a href="https://wowchemy.com/templates/" target="_blank" rel="noopener">&lt;strong>Create a new site&lt;/strong>&lt;/a>&lt;/li>
-&lt;li>📚 &lt;a href="https://wowchemy.com/docs/" target="_blank" rel="noopener">&lt;strong>Personalize your site&lt;/strong>&lt;/a>&lt;/li>
-&lt;li>💬 &lt;a href="https://discord.gg/z8wNYzb" target="_blank" rel="noopener">Chat with the &lt;strong>Wowchemy community&lt;/strong>&lt;/a> or &lt;a href="https://discourse.gohugo.io" target="_blank" rel="noopener">&lt;strong>Hugo community&lt;/strong>&lt;/a>&lt;/li>
-&lt;li>🐦 Twitter: &lt;a href="https://twitter.com/wowchemy" target="_blank" rel="noopener">@wowchemy&lt;/a> &lt;a href="https://twitter.com/GeorgeCushen" target="_blank" rel="noopener">@GeorgeCushen&lt;/a> &lt;a href="https://twitter.com/search?q=%23MadeWithWowchemy&amp;amp;src=typed_query" target="_blank" rel="noopener">#MadeWithWowchemy&lt;/a>&lt;/li>
-&lt;li>💡 &lt;a href="https://github.com/wowchemy/wowchemy-hugo-modules/issues" target="_blank" rel="noopener">Request a &lt;strong>feature&lt;/strong> or report a &lt;strong>bug&lt;/strong> for &lt;em>Wowchemy&lt;/em>&lt;/a>&lt;/li>
-&lt;li>⬆️ &lt;strong>Updating Wowchemy?&lt;/strong> View the &lt;a href="https://wowchemy.com/docs/hugo-tutorials/update/" target="_blank" rel="noopener">Update Tutorial&lt;/a> and &lt;a href="https://wowchemy.com/updates/" target="_blank" rel="noopener">Release Notes&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h2 id="crowd-funded-open-source-software">Crowd-funded open-source software&lt;/h2>
-&lt;p>To help us develop this template and software sustainably under the MIT license, we ask all individuals and businesses that use it to help support its ongoing maintenance and development via sponsorship.&lt;/p>
-&lt;h3 id="-click-here-to-become-a-sponsor-and-help-support-wowchemys-future-httpswowchemycomplans">&lt;a href="https://wowchemy.com/plans/" target="_blank" rel="noopener">❤️ Click here to become a sponsor and help support Wowchemy&amp;rsquo;s future ❤️&lt;/a>&lt;/h3>
-&lt;p>As a token of appreciation for sponsoring, you can &lt;strong>unlock &lt;a href="https://wowchemy.com/plans/" target="_blank" rel="noopener">these&lt;/a> awesome rewards and extra features 🦄✨&lt;/strong>&lt;/p>
-&lt;h2 id="ecosystem">Ecosystem&lt;/h2>
-&lt;ul>
-&lt;li>&lt;strong>&lt;a href="https://github.com/wowchemy/hugo-academic-cli" target="_blank" rel="noopener">Hugo Academic CLI&lt;/a>:&lt;/strong> Automatically import publications from BibTeX&lt;/li>
-&lt;/ul>
-&lt;h2 id="inspiration">Inspiration&lt;/h2>
-&lt;p>&lt;a href="https://academic-demo.netlify.com/" target="_blank" rel="noopener">Check out the latest &lt;strong>demo&lt;/strong>&lt;/a> of what you&amp;rsquo;ll get in less than 10 minutes, or &lt;a href="https://wowchemy.com/user-stories/" target="_blank" rel="noopener">view the &lt;strong>showcase&lt;/strong>&lt;/a> of personal, project, and business sites.&lt;/p>
-&lt;h2 id="features">Features&lt;/h2>
-&lt;ul>
-&lt;li>&lt;strong>Page builder&lt;/strong> - Create &lt;em>anything&lt;/em> with &lt;a href="https://wowchemy.com/docs/page-builder/" target="_blank" rel="noopener">&lt;strong>widgets&lt;/strong>&lt;/a> and &lt;a href="https://wowchemy.com/docs/content/writing-markdown-latex/" target="_blank" rel="noopener">&lt;strong>elements&lt;/strong>&lt;/a>&lt;/li>
-&lt;li>&lt;strong>Edit any type of content&lt;/strong> - Blog posts, publications, talks, slides, projects, and more!&lt;/li>
-&lt;li>&lt;strong>Create content&lt;/strong> in &lt;a href="https://wowchemy.com/docs/content/writing-markdown-latex/" target="_blank" rel="noopener">&lt;strong>Markdown&lt;/strong>&lt;/a>, &lt;a href="https://wowchemy.com/docs/import/jupyter/" target="_blank" rel="noopener">&lt;strong>Jupyter&lt;/strong>&lt;/a>, or &lt;a href="https://wowchemy.com/docs/install-locally/" target="_blank" rel="noopener">&lt;strong>RStudio&lt;/strong>&lt;/a>&lt;/li>
-&lt;li>&lt;strong>Plugin System&lt;/strong> - Fully customizable &lt;a href="https://wowchemy.com/docs/customization/" target="_blank" rel="noopener">&lt;strong>color&lt;/strong> and &lt;strong>font themes&lt;/strong>&lt;/a>&lt;/li>
-&lt;li>&lt;strong>Display Code and Math&lt;/strong> - Code highlighting and &lt;a href="https://en.wikibooks.org/wiki/LaTeX/Mathematics" target="_blank" rel="noopener">LaTeX math&lt;/a> supported&lt;/li>
-&lt;li>&lt;strong>Integrations&lt;/strong> - &lt;a href="https://analytics.google.com" target="_blank" rel="noopener">Google Analytics&lt;/a>, &lt;a href="https://disqus.com" target="_blank" rel="noopener">Disqus commenting&lt;/a>, Maps, Contact Forms, and more!&lt;/li>
-&lt;li>&lt;strong>Beautiful Site&lt;/strong> - Simple and refreshing one page design&lt;/li>
-&lt;li>&lt;strong>Industry-Leading SEO&lt;/strong> - Help get your website found on search engines and social media&lt;/li>
-&lt;li>&lt;strong>Media Galleries&lt;/strong> - Display your images and videos with captions in a customizable gallery&lt;/li>
-&lt;li>&lt;strong>Mobile Friendly&lt;/strong> - Look amazing on every screen with a mobile friendly version of your site&lt;/li>
-&lt;li>&lt;strong>Multi-language&lt;/strong> - 34+ language packs including English, 中文, and Português&lt;/li>
-&lt;li>&lt;strong>Multi-user&lt;/strong> - Each author gets their own profile page&lt;/li>
-&lt;li>&lt;strong>Privacy Pack&lt;/strong> - Assists with GDPR&lt;/li>
-&lt;li>&lt;strong>Stand Out&lt;/strong> - Bring your site to life with animation, parallax backgrounds, and scroll effects&lt;/li>
-&lt;li>&lt;strong>One-Click Deployment&lt;/strong> - No servers. No databases. Only files.&lt;/li>
-&lt;/ul>
-&lt;h2 id="themes">Themes&lt;/h2>
-&lt;p>Wowchemy and its templates come with &lt;strong>automatic day (light) and night (dark) mode&lt;/strong> built-in. Alternatively, visitors can choose their preferred mode - click the moon icon in the top right of the &lt;a href="https://academic-demo.netlify.com/" target="_blank" rel="noopener">Demo&lt;/a> to see it in action! Day/night mode can also be disabled by the site admin in &lt;code>params.toml&lt;/code>.&lt;/p>
-&lt;p>&lt;a href="https://wowchemy.com/docs/customization" target="_blank" rel="noopener">Choose a stunning &lt;strong>theme&lt;/strong> and &lt;strong>font&lt;/strong>&lt;/a> for your site. Themes are fully customizable.&lt;/p>
-&lt;h2 id="license">License&lt;/h2>
-&lt;p>Copyright 2016-present &lt;a href="https://georgecushen.com" target="_blank" rel="noopener">George Cushen&lt;/a>.&lt;/p>
-&lt;p>Released under the &lt;a href="https://github.com/wowchemy/wowchemy-hugo-modules/blob/master/LICENSE.md" target="_blank" rel="noopener">MIT&lt;/a> license.&lt;/p></description></item><item><title>Tutorial for CodeForces 1407D</title><link>https://tgc54.com/post/cf1407d/</link><pubDate>Tue, 08 Sep 2020 00:00:00 +0000</pubDate><guid>https://tgc54.com/post/cf1407d/</guid><description>&lt;h2 id="solution">Solution&lt;/h2>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Tutorial for CodeForces 1407D</title><link>https://tgc54.com/post/cf1407d/</link><pubDate>Tue, 08 Sep 2020 00:00:00 +0000</pubDate><guid>https://tgc54.com/post/cf1407d/</guid><description>&lt;h2 id="solution">Solution&lt;/h2>
 &lt;p>First let&amp;rsquo;s consider the case where $\max(h_{i + 1}, \ldots, h_{j - 1}) &amp;lt; \min(h_i, h_j)$. $h_i$ could be lower or higher than $h_j$. There can be multiple $i$ that satisfies the condition and we can observe the leftmost $i$ is the first that $h_i\ge h_j$, let&amp;rsquo;s denote this $i_{min}$, other $i$ between $[i_{min},j]$ must satisfy that $h_i$ is the maximum value among $[i,j-1]$. This can be solved using monotonic stack. Assume we store the indices in the stack, when adding a new index $j$, all the indices that will be removed are a valid position to jump to $j$, so we can do dp and update the minimum number of moves. The time complexity is $O(n)$.&lt;/p>
 &lt;p>The second case is similar.&lt;/p>
 &lt;h2 id="code">Code&lt;/h2>
