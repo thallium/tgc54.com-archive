@@ -21,7 +21,7 @@ jobs:
           extended: true
 
       - name: Build
-        run: hugo --minify --baseURL thallium.github.io/tgc54.com
+        run: hugo --minify --baseURL https://thallium.github.io/tgc54.com
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
