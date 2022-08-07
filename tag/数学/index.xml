@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>数学 | Thallium54</title><link>https://thallium.github.io/tgc54.com/tag/%E6%95%B0%E5%AD%A6/</link><atom:link href="https://thallium.github.io/tgc54.com/tag/%E6%95%B0%E5%AD%A6/index.xml" rel="self" type="application/rss+xml"/><description>数学</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 05 May 2021 22:34:22 -0400</lastBuildDate><image><url>https://thallium.github.io/tgc54.com/media/icon_hu423b19687c85b10febae54029c442fbf_4135_512x512_fill_lanczos_center_3.png</url><title>数学</title><link>https://thallium.github.io/tgc54.com/tag/%E6%95%B0%E5%AD%A6/</link></image><item><title>一些数学模型</title><link>https://thallium.github.io/tgc54.com/zh/post/math_model/</link><pubDate>Wed, 05 May 2021 22:34:22 -0400</pubDate><guid>https://thallium.github.io/tgc54.com/zh/post/math_model/</guid><description>&lt;p>总结一些常见的数学模型。&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>数学 | Thallium54</title><link>https://tgc54.com/tag/%E6%95%B0%E5%AD%A6/</link><atom:link href="https://tgc54.com/tag/%E6%95%B0%E5%AD%A6/index.xml" rel="self" type="application/rss+xml"/><description>数学</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 05 May 2021 22:34:22 -0400</lastBuildDate><image><url>https://tgc54.com/media/icon_hu423b19687c85b10febae54029c442fbf_4135_512x512_fill_lanczos_center_3.png</url><title>数学</title><link>https://tgc54.com/tag/%E6%95%B0%E5%AD%A6/</link></image><item><title>一些数学模型</title><link>https://tgc54.com/zh/post/math_model/</link><pubDate>Wed, 05 May 2021 22:34:22 -0400</pubDate><guid>https://tgc54.com/zh/post/math_model/</guid><description>&lt;p>总结一些常见的数学模型。&lt;/p>
 &lt;h2 id="将直线上多个点移动到一个点的最小距离">将直线上多个点移动到一个点的最小距离&lt;/h2>
 &lt;p>移动到最中间的那个点距离最小，或者说是移动到一点使得两侧的点一样多。&lt;/p>
 &lt;h2 id="将直线上多个点移动到连续的位置">将直线上多个点移动到连续的位置&lt;/h2>
@@ -7,7 +7,7 @@
 &lt;p>假设$n, m$互质，最大的不能被表示为$an+bm, a, b\ge 0$的数是$nm-m-n$.&lt;/p>
 &lt;p>&lt;a href="https://artofproblemsolving.com/wiki/index.php/Chicken_McNugget_Theorem" target="_blank" rel="noopener">source&lt;/a>&lt;/p>
 &lt;h2 id="最小化一点到其他点距离的平方的和">最小化一点到其他点距离的平方的和&lt;/h2>
-&lt;p>由于$dis^2=x^2+y^2$，而x和y可以独立改变，所以可以分别最小化两个坐标轴的距离，也就是坐标的平均数。&lt;/p></description></item><item><title>Codeforces 1220D - Alex and Julian 题解</title><link>https://thallium.github.io/tgc54.com/zh/post/cf1220d/</link><pubDate>Thu, 09 Apr 2020 00:00:00 +0000</pubDate><guid>https://thallium.github.io/tgc54.com/zh/post/cf1220d/</guid><description>&lt;p>妈个唧看错题了&lt;/p>
+&lt;p>由于$dis^2=x^2+y^2$，而x和y可以独立改变，所以可以分别最小化两个坐标轴的距离，也就是坐标的平均数。&lt;/p></description></item><item><title>Codeforces 1220D - Alex and Julian 题解</title><link>https://tgc54.com/zh/post/cf1220d/</link><pubDate>Thu, 09 Apr 2020 00:00:00 +0000</pubDate><guid>https://tgc54.com/zh/post/cf1220d/</guid><description>&lt;p>妈个唧看错题了&lt;/p>
 &lt;h2 id="solution">Solution&lt;/h2>
 &lt;p>If there&amp;rsquo;s only one element in the set, the graph is obvious bipartite. If there&amp;rsquo;s more than two elements, the graph will contains some cycles due to each pair of elements.&lt;/p>
 &lt;p>Suppose we have $a$ and $b$ in the set and the cycle will look like this:&lt;/p>
@@ -69,7 +69,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="参考资料">参考资料&lt;/h2>
 &lt;p>&lt;a href="https://codeforces.com/blog/entry/69901" target="_blank" rel="noopener">https://codeforces.com/blog/entry/69901&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://codeforces.com/blog/entry/69899" target="_blank" rel="noopener">https://codeforces.com/blog/entry/69899&lt;/a>&lt;/p></description></item><item><title>CodeForces 1279D - Santa's Bot 题解</title><link>https://thallium.github.io/tgc54.com/zh/post/cf1279d/</link><pubDate>Thu, 02 Apr 2020 00:00:00 +0000</pubDate><guid>https://thallium.github.io/tgc54.com/zh/post/cf1279d/</guid><description>&lt;p>现在看来当时是真的菜，不过还是能学到一些奇怪的知识233&lt;/p>
+&lt;p>&lt;a href="https://codeforces.com/blog/entry/69899" target="_blank" rel="noopener">https://codeforces.com/blog/entry/69899&lt;/a>&lt;/p></description></item><item><title>CodeForces 1279D - Santa's Bot 题解</title><link>https://tgc54.com/zh/post/cf1279d/</link><pubDate>Thu, 02 Apr 2020 00:00:00 +0000</pubDate><guid>https://tgc54.com/zh/post/cf1279d/</guid><description>&lt;p>现在看来当时是真的菜，不过还是能学到一些奇怪的知识233&lt;/p>
 &lt;h2 id="题解">题解&lt;/h2>
 &lt;p>最多有$10^6$对$(x,y)$，所以我们可以直接遍历所有的对。每一对有$\dfrac 1 {n\cdot k_x}$的概率被选中，所以一个合法的$(x,y,z)$的概率是$\dfrac {cnt_y} {n\cdot k_x\cdot n}$，其中$cnt_y$是想要y礼物的孩子的个数。&lt;/p>
 &lt;p>一个有意思的性质是$\dfrac a b +\dfrac c d\equiv ab^{-1}+cd^{-1}\pmod p$，当$p$与分母互质的时候成立，所以我们在遍历的时候可以直接把概率转换成$cnt_y\cdot n^{-1}\cdot k_x^{-1}\cdot n^{-1}$然后加到答案上。&lt;/p>
@@ -122,7 +122,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cout&lt;/span>&lt;span class="o">&amp;lt;&amp;lt;&lt;/span>&lt;span class="n">ans&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Codeforces 205D - Little Elephant and Interval 题解</title><link>https://thallium.github.io/tgc54.com/zh/post/cf205c/</link><pubDate>Fri, 21 Feb 2020 00:00:00 +0000</pubDate><guid>https://thallium.github.io/tgc54.com/zh/post/cf205c/</guid><description>&lt;h1 id="题解">题解&lt;/h1>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Codeforces 205D - Little Elephant and Interval 题解</title><link>https://tgc54.com/zh/post/cf205c/</link><pubDate>Fri, 21 Feb 2020 00:00:00 +0000</pubDate><guid>https://tgc54.com/zh/post/cf205c/</guid><description>&lt;h1 id="题解">题解&lt;/h1>
 &lt;p>这种题常见套路就是写一个求1到x答案的函数$F(x)$然后最终答案就是$F(r)-F(l-1)$。&lt;/p>
 &lt;p>一种很妙的方法是我们可以通过在任意数字之后加一个第一位的数字从而得到题目要求的数字。所以如果x小于10那么答案就是x，否则答案就是去掉最后一位的x+9。如果最后一位小于第一位我们还要把答案减1。&lt;/p>
 &lt;h1 id="code">Code&lt;/h1>
@@ -147,7 +147,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cout&lt;/span>&lt;span class="o">&amp;lt;&amp;lt;&lt;/span>&lt;span class="n">cal&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">r&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">cal&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">l&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Codeforces 1295D - Same GCDs 题解</title><link>https://thallium.github.io/tgc54.com/zh/post/cf1295d/</link><pubDate>Wed, 29 Jan 2020 00:00:00 +0000</pubDate><guid>https://thallium.github.io/tgc54.com/zh/post/cf1295d/</guid><description>&lt;p>FML&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Codeforces 1295D - Same GCDs 题解</title><link>https://tgc54.com/zh/post/cf1295d/</link><pubDate>Wed, 29 Jan 2020 00:00:00 +0000</pubDate><guid>https://tgc54.com/zh/post/cf1295d/</guid><description>&lt;p>FML&lt;/p>
 &lt;h1 id="题解">题解&lt;/h1>
 &lt;p>让$g= \gcd(a,m)$，所以我们有$a=g\cdot k， m=g\cdot l,\gcd(l,k)=1$，不难发现，如果我们想要使$\gcd(a,m)=\gcd(a+x,m)$， $x$必须是$g$的倍数，设$x=n\cdot g$。 而且，$k+n$和$l$必须要互质，所以我们要找到从$k$到$k+l$中与$l$互质的数的个数。对于那些大于$l$的数，如果 $\gcd(k+x,l)=1$那么$\gcd((k+x)\bmod l,l)=1$。又因为$(k+x)\bmod l&amp;lt; l $，所以我们真正要算的是比$l$小并且与$l$互质的数的个数, 也就是$\varphi(l)$。&lt;/p>
 &lt;h1 id="code">Code&lt;/h1>
@@ -179,7 +179,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Codeforces 1294D - MEX maximizing 题解</title><link>https://thallium.github.io/tgc54.com/zh/post/cf1294d/</link><pubDate>Wed, 22 Jan 2020 00:00:00 +0000</pubDate><guid>https://thallium.github.io/tgc54.com/zh/post/cf1294d/</guid><description>&lt;p>还是大佬的思路强啊。&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Codeforces 1294D - MEX maximizing 题解</title><link>https://tgc54.com/zh/post/cf1294d/</link><pubDate>Wed, 22 Jan 2020 00:00:00 +0000</pubDate><guid>https://tgc54.com/zh/post/cf1294d/</guid><description>&lt;p>还是大佬的思路强啊。&lt;/p>
 &lt;h1 id="题解">题解&lt;/h1>
 &lt;p>我们可以得到所有模$x$相同的数通过加或减$x$所以我们只关注$a_i\bmod x$。为了使mex最大化，我们需要从0开始尽可能长的连续的数。在模的意义下，也就是说$1,2,3,4,\dots,x,1,2,3,4,\dots,x,\dots$。所以我们只需要保存同余类里的数的个数然后每次询问后尝试增加答案就行了。&lt;/p>
 &lt;h1 id="code">Code&lt;/h1>
@@ -204,7 +204,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Codeforces 1285C - Fadi and LCM 题解</title><link>https://thallium.github.io/tgc54.com/zh/post/cf1285c/</link><pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate><guid>https://thallium.github.io/tgc54.com/zh/post/cf1285c/</guid><description>&lt;p>long long开小了，血的教训。&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Codeforces 1285C - Fadi and LCM 题解</title><link>https://tgc54.com/zh/post/cf1285c/</link><pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate><guid>https://tgc54.com/zh/post/cf1285c/</guid><description>&lt;p>long long开小了，血的教训。&lt;/p>
 &lt;h1 id="题解">题解&lt;/h1>
 &lt;p>不难看出$a$和$b$必须是互质的，我们质因数分解X，最多有11个不同的质因数因为前12个质因数的积大于$1\cdot 10^{12}$。我们可以暴力枚举所有的分配情况来得到最优的答案。&lt;/p>
 &lt;p>另一种解法是遍历X的所有因数$p$然后判断$\gcd(d,\frac X d)$是否是1并更新答案。&lt;/p>
@@ -277,7 +277,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cout&lt;/span>&lt;span class="o">&amp;lt;&amp;lt;&lt;/span>&lt;span class="n">ansa&lt;/span>&lt;span class="o">&amp;lt;&amp;lt;&lt;/span>&lt;span class="sc">&amp;#39; &amp;#39;&lt;/span>&lt;span class="o">&amp;lt;&amp;lt;&lt;/span>&lt;span class="n">ansb&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>CodeForces 1128C - Primes and Multiplication 题解</title><link>https://thallium.github.io/tgc54.com/zh/post/cf1128c/</link><pubDate>Tue, 01 Oct 2019 00:00:00 +0000</pubDate><guid>https://thallium.github.io/tgc54.com/zh/post/cf1128c/</guid><description>&lt;p>long long爆的好啊！！&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>CodeForces 1128C - Primes and Multiplication 题解</title><link>https://tgc54.com/zh/post/cf1128c/</link><pubDate>Tue, 01 Oct 2019 00:00:00 +0000</pubDate><guid>https://tgc54.com/zh/post/cf1128c/</guid><description>&lt;p>long long爆的好啊！！&lt;/p>
 &lt;p>&lt;a href="https://codeforces.com/contest/1228/problem/C" target="_blank" rel="noopener">题目链接&lt;/a>&lt;/p>
 &lt;p>我们把要求的式子展开
 $$\begin{align*}&amp;amp;f(x, 1) \cdot f(x, 2) \cdot \ldots \cdot f(x, n) \\ =&amp;amp;g(1,p_1)\cdot g(1,p_2)\cdot \ldots \cdot g(1,p_n) \\ &amp;amp;g(2,p_1)\cdot g(2,p_2)\cdot \ldots \cdot g(2,p_n) \\ &amp;amp;g(3,p_1)\cdot g(3,p_2)\cdot \ldots \cdot g(3,p_n) \\ &amp;amp;\vdots \\ &amp;amp;g(n,p_1)\cdot g(n,p_2)\cdot \ldots \cdot g(n,p_n)\end{align*} $$&lt;/p>
@@ -360,7 +360,7 @@ $$\begin{align*}&amp;amp;f(x, 1) \cdot f(x, 2) \cdot \ldots \cdot f(x, n) \\ =&a
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cout&lt;/span> &lt;span class="o">&amp;lt;&amp;lt;&lt;/span> &lt;span class="n">ans&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Kattis - Farey Sums题解</title><link>https://thallium.github.io/tgc54.com/zh/post/kattis_fareysums/</link><pubDate>Wed, 25 Sep 2019 00:00:00 +0000</pubDate><guid>https://thallium.github.io/tgc54.com/zh/post/kattis_fareysums/</guid><description>&lt;blockquote>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Kattis - Farey Sums题解</title><link>https://tgc54.com/zh/post/kattis_fareysums/</link><pubDate>Wed, 25 Sep 2019 00:00:00 +0000</pubDate><guid>https://tgc54.com/zh/post/kattis_fareysums/</guid><description>&lt;blockquote>
 &lt;p>经过长时间思考并解决调问题的感觉太好了 ——xls&lt;/p>
 &lt;/blockquote>
 &lt;p>&lt;a href="https://open.kattis.com/problems/fareysums" target="_blank" rel="noopener">题目链接&lt;/a>&lt;/p>
