@@ -1,4 +1,39 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Thallium54</title><link>https://tgc54.com/zh/</link><atom:link href="https://tgc54.com/zh/index.xml" rel="self" type="application/rss+xml"/><description>Thallium54</description><generator>Wowchemy (https://wowchemy.com)</generator><language>zh-Hans</language><lastBuildDate>Sun, 07 Aug 2022 08:38:34 -0400</lastBuildDate><image><url>https://tgc54.com/media/icon_hu423b19687c85b10febae54029c442fbf_4135_512x512_fill_lanczos_center_3.png</url><title>Thallium54</title><link>https://tgc54.com/zh/</link></image><item><title>Codeforces Round #812 E - Cross Swapping题解</title><link>https://tgc54.com/zh/post/cf1713e/</link><pubDate>Sun, 07 Aug 2022 08:38:34 -0400</pubDate><guid>https://tgc54.com/zh/post/cf1713e/</guid><description>&lt;p>首先发现无论如何操作，只有关于对角线对称的两个位置（$a_{i, j}, a_{j, i}$）会被交换，而且只有$k=i$和$k=j$的操作会影响这两个位置的交换。
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Thallium54</title><link>https://tgc54.com/zh/</link><atom:link href="https://tgc54.com/zh/index.xml" rel="self" type="application/rss+xml"/><description>Thallium54</description><generator>Wowchemy (https://wowchemy.com)</generator><language>zh-Hans</language><lastBuildDate>Mon, 15 Aug 2022 21:46:28 -0400</lastBuildDate><image><url>https://tgc54.com/media/icon_hu423b19687c85b10febae54029c442fbf_4135_512x512_fill_lanczos_center_3.png</url><title>Thallium54</title><link>https://tgc54.com/zh/</link></image><item><title>全新的开始 - 算法竞赛机器人开发日志1</title><link>https://tgc54.com/zh/post/cp-bot-dev-log-1/</link><pubDate>Mon, 15 Aug 2022 21:46:28 -0400</pubDate><guid>https://tgc54.com/zh/post/cp-bot-dev-log-1/</guid><description>&lt;p>我的机器人，明明只有两个功能，却已重写了两次了，第一次从C++搬到Python，现在又从Python搬到Nonebot框架上（虽说还是Python)，以后应该不会再动了。这次搬迁起源于周六在给上一版本写readme，准备发布到GitHub上，当时我在特点里写下了&lt;/p>
+&lt;blockquote>
+&lt;p>不使用框架（可能是个错误的决定）&lt;/p>
+&lt;/blockquote>
+&lt;p>然后我就不禁思考这到底是不是个错误的决定：当初不用框架的原因也很简单，就是不想学框架的那一套，然后又觉得自己造点轮子也挺好玩的，但后来发现自己需要造的轮子越来越大时就不那么好玩了，目前有几个大轮子要造：&lt;/p>
+&lt;ul>
+&lt;li>命令与参数系统，如果将来命令增多的话一堆if else加字符串匹配又麻烦又丑&lt;/li>
+&lt;li>定时命令，比赛提醒是我接下来想做的一大特性，因为我老是忘AtCoder的比赛&lt;/li>
+&lt;li>配置系统，要是将来别人要用的话一定要做好配置系统&lt;/li>
+&lt;/ul>
+&lt;p>于是我又看了看Nonebot的文档，发现好像也没那么麻烦，而且自带命令与定时系统，又想到框架难道不就是为了让开发者专注于编写业务逻辑吗？于是就想先试试看，然后第二天早上加中午吃完饭一点时间就基本搬过去了，又看到非常fancy的log界面就决定完全转到Nonebot上了。&lt;/p>
+&lt;p>那又为什么要写开发日志捏？因为机器人其实好久没再继续开发了，自从前两周发现了APScheduler之后就开始研究加缓存与比赛提醒的功能，然后就萌生了写日志的想法，这次搬迁又差不多算是“从头开始”所以就每周写一篇开发日志记录本周工作以及接下来要做的任务，顺便起到督促自己的作用。&lt;/p>
+&lt;p>第一篇（这篇）本来应该周日写的来着，结果周日出去玩由于突发情况回来的很晚，基本上接着就上床睡觉了。以后日志争取在周末写，这次由于背景介绍所以稍长，以后应该就简单记录一下。&lt;/p>
+&lt;p>上周工作：&lt;/p>
+&lt;ul>
+&lt;li>基本完成搬运，两个命令已可用，但缓存还没搞定&lt;/li>
+&lt;li>一些重构：重命名，添加type hint&lt;/li>
+&lt;li>变成包之后import语句要变成类似&lt;code>from . import xxx&lt;/code>，把所有import都修了（还挺多的）&lt;/li>
+&lt;/ul>
+&lt;p>TODO：&lt;/p>
+&lt;ul>
+&lt;li>参数系统，查比赛命令挺需要的
+&lt;ul>
+&lt;li>画图功能也很需要&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>看看内置的scheduler能不能用数据库的job store，如果能的话：
+&lt;ul>
+&lt;li>尽快能把缓存弄好&lt;/li>
+&lt;li>比赛提醒&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>根据配置开关某些功能，比如是否使用缓存&lt;/li>
+&lt;li>重构一些抄的TLE的代码，感觉不是很喜欢TLE的一些设计&lt;/li>
+&lt;li>搬一些TLE其他的有趣的功能&lt;/li>
+&lt;/ul></description></item><item><title>Codeforces Round #812 E - Cross Swapping题解</title><link>https://tgc54.com/zh/post/cf1713e/</link><pubDate>Sun, 07 Aug 2022 08:38:34 -0400</pubDate><guid>https://tgc54.com/zh/post/cf1713e/</guid><description>&lt;p>首先发现无论如何操作，只有关于对角线对称的两个位置（$a_{i, j}, a_{j, i}$）会被交换，而且只有$k=i$和$k=j$的操作会影响这两个位置的交换。
 我们用$s_i$来表示操作$k=i$是否被执行，如果$a_{i, j} &amp;lt; a_{j, i}$，我们不希望他们被交换所以我们希望$s_i\oplus s_j=0$，反之如果$a_{i, j} &amp;gt; a_{j, i}$，我们希望他们交换所以我们希望$s_i \oplus s_j = 1$。（$\oplus$代表按位异或）&lt;/p>
 &lt;p>对于字典序的问题，往往采用从前往后贪心的策略。对于当前的$i, j$我们要看之前的限制是否允许我们希望的$s_i \oplus s_j$值。那么如何判断呢？我们用一种让并查集的边带权的技巧，即边$(u, v)$的权值代表$s_u\oplus s_v$，那么一个分量中任意两点的异或值即为路径上边的异或值。为了方便实现我们用节点$u$代表$u$到其父节点的边。在&lt;code>find&lt;/code>和&lt;code>join&lt;/code>时要更新边权（见代码）。&lt;/p>
 &lt;p>条件$s_i \oplus s_j = x$就相当于给$i$和$j$中间连一条权值为$x$的边，对应并查集的&lt;code>join&lt;/code>操作，如果加边之前两个点不在同一个连通分量，那么条件一定是可以满足的。如果在同一个分量中，那么说明$s_i \oplus s_j$已经是确定的，如果$s_i \oplus s_j \neq x$说明当前条件不能满足，我们就跳过它。&lt;/p>
