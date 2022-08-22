@@ -1,4 +1,18 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Thallium54</title><link>https://tgc54.com/zh/</link><atom:link href="https://tgc54.com/zh/index.xml" rel="self" type="application/rss+xml"/><description>Thallium54</description><generator>Wowchemy (https://wowchemy.com)</generator><language>zh-Hans</language><lastBuildDate>Mon, 15 Aug 2022 21:46:28 -0400</lastBuildDate><image><url>https://tgc54.com/media/icon_hu423b19687c85b10febae54029c442fbf_4135_512x512_fill_lanczos_center_3.png</url><title>Thallium54</title><link>https://tgc54.com/zh/</link></image><item><title>全新的开始 - 算法竞赛机器人开发日志1</title><link>https://tgc54.com/zh/post/cp-bot-dev-log-1/</link><pubDate>Mon, 15 Aug 2022 21:46:28 -0400</pubDate><guid>https://tgc54.com/zh/post/cp-bot-dev-log-1/</guid><description>&lt;p>我的机器人，明明只有两个功能，却已重写了两次了，第一次从C++搬到Python，现在又从Python搬到Nonebot框架上（虽说还是Python)，以后应该不会再动了。这次搬迁起源于周六在给上一版本写readme，准备发布到GitHub上，当时我在特点里写下了&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Thallium54</title><link>https://tgc54.com/zh/</link><atom:link href="https://tgc54.com/zh/index.xml" rel="self" type="application/rss+xml"/><description>Thallium54</description><generator>Wowchemy (https://wowchemy.com)</generator><language>zh-Hans</language><lastBuildDate>Sun, 21 Aug 2022 21:41:46 -0400</lastBuildDate><image><url>https://tgc54.com/media/icon_hu423b19687c85b10febae54029c442fbf_4135_512x512_fill_lanczos_center_3.png</url><title>Thallium54</title><link>https://tgc54.com/zh/</link></image><item><title>全新的开始 - 算法竞赛机器人开发日志2</title><link>https://tgc54.com/zh/post/cp-bot-dev-log-2/</link><pubDate>Sun, 21 Aug 2022 21:41:46 -0400</pubDate><guid>https://tgc54.com/zh/post/cp-bot-dev-log-2/</guid><description>&lt;p>这周没做什么大功能，做了下几件小事：&lt;/p>
+&lt;h3 id="参数">参数&lt;/h3>
+&lt;p>原来&lt;code>on_shell_command&lt;/code>就是专门负责这个的，可以传入一个argument parser，那这样就很简单了，于是给查比赛加了&lt;code>-n x&lt;/code>和&lt;code>--all&lt;/code>以显示前x条或者全部比赛。&lt;/p>
+&lt;h3 id="数据库相关">数据库相关&lt;/h3>
+&lt;p>最近了解到ORM（我真是孤陋寡闻现在才知道这个东西），于是决定放弃MongoDB还是用关系型数据库，但APScheduler的&lt;code>SQLAlchemyJobStore&lt;/code>好像没完全支持SQLAlchemy 2所以比赛提醒暂时就没法做可持久化了，但一想可持久化也没有太大的用，每次更新缓存的时候重新添加一遍提醒应该就够了。。。缓存的话到是弄完了但是没法测试，因为今天cf的API一直都是挂了的。说到ORM就不得不提重构的事：&lt;/p>
+&lt;h3 id="重构">重构&lt;/h3>
+&lt;p>现在&lt;code>Contest&lt;/code>类不再用&lt;code>NamedTuple&lt;/code>了，因为可以和ORM（用的SQLModel）的Model共用一个类，而且SQLModel的model也是Pydantic model所以可以直接用&lt;code>parse_obj&lt;/code>，比之前&lt;code>NamedTuple&lt;/code>优雅多了。不得不说SQLModel的理念真的很有想法。&lt;/p>
+&lt;h3 id="latex插件">LaTex插件&lt;/h3>
+&lt;p>受群友的提示写了个渲染LaTex的插件，试了Matplotlib和SymPy的latex功能都不太满意，最后基于SymPy的&lt;code>preview&lt;/code>函数自己写了个插件。&lt;/p>
+&lt;p>TODO：&lt;/p>
+&lt;ul>
+&lt;li>缓存和提醒&lt;/li>
+&lt;li>继续研究TLE的代码看看有没有好玩的功能&lt;/li>
+&lt;li>把代码整理好开源到github上&lt;/li>
+&lt;/ul></description></item><item><title>全新的开始 - 算法竞赛机器人开发日志1</title><link>https://tgc54.com/zh/post/cp-bot-dev-log-1/</link><pubDate>Mon, 15 Aug 2022 21:46:28 -0400</pubDate><guid>https://tgc54.com/zh/post/cp-bot-dev-log-1/</guid><description>&lt;p>我的机器人，明明只有两个功能，却已重写了两次了，第一次从C++搬到Python，现在又从Python搬到Nonebot框架上（虽说还是Python)，以后应该不会再动了。这次搬迁起源于周六在给上一版本写readme，准备发布到GitHub上，当时我在特点里写下了&lt;/p>
 &lt;blockquote>
 &lt;p>不使用框架（可能是个错误的决定）&lt;/p>
 &lt;/blockquote>
