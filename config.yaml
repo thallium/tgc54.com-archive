@@ -1,0 +1,51 @@
+languageCode: 'en-us'
+theme: 'hello-friend'
+paginate: 3
+hideReadMore: true
+hasCJKLanguage: true
+
+baseURL: '/'
+
+
+languages:
+  en:
+    title: "Thallium54"
+    menu:
+      main:
+        - identifier: "posts"
+          name: "Posts"
+          url: "/posts"
+        - identifier: "Categories"
+          name: "Categories"
+          url: "/categories"
+        - identifier: "Tags"
+          name: "Tags"
+          url: "/tags"
+        - identifier: "Wiki"
+          name: "Wiki"
+          url: "https://wiki.tgc54.com"
+    params:
+      logo:
+        logoText: Thallium54
+        logoHomeLink: '/'
+  zh:
+    title: "Thallium54"
+    contentDir: content/zh
+    menu:
+      main:
+        - identifier: "posts"
+          name: "Posts"
+          url: "/zh/posts"
+        - identifier: "Categories"
+          name: "Categories"
+          url: "/zh/categories"
+        - identifier: "Tags"
+          name: "Tags"
+          url: "/zh/tags"
+        - identifier: "Wiki"
+          name: "Wiki"
+          url: "https://wiki.tgc54.com"
+    params:
+      logo:
+        logoText: Thallium54
+        logoHomeLink: '/zh'
