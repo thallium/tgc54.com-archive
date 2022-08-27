@@ -33,7 +33,6 @@ languages:
         logoText: Thallium54
         logoHomeLink: '/'
       langName: English
-      showMenuItems: 2
   zh:
     title: "Thallium54"
     contentDir: content/zh

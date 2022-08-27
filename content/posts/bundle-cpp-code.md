@@ -21,6 +21,7 @@ projects: []
 ---
 As a competitive programmer, I always want to find a solution to avoid copy-and-pasting my algorithm library so I can write more complex code lol.
 
+<!--more-->
 Inspired by [Egor](https://codeforces.com/profile/Egor)'s rust bundler, I wondered is there something similar for C++? I remembered that I read [this](https://codeforces.com/blog/entry/77139) long time ago then I spent some time finding that blog but it's not a bundler and looks quite complicated. In the comment someone mentioned using the `cpp` command which does the preprocessing work. As you may know, `#include` is basically copy-and-paste so this actually sounds right, but the problem is that it also copies and pastes the standard library which is over 200k+ lines of code. So I dug a bit further to see if it's possible to skip system header and found [this](https://stackoverflow.com/a/20889599), but it only works for clang which what I'm using so I didn't look for a solution for gcc.
 
 The command is:
