@@ -5,8 +5,8 @@ Thallium54</title><meta charset=utf-8><meta name=viewport content="width=device-
 <span class=header__right><nav class=menu><ul class="menu__inner menu__inner--desktop"><li><a href=/zh/posts>博文</a></li><li><a href=/zh/categories>分类</a></li><li><a href=/zh/tags>标签</a></li><li><a href=https://wiki.tgc54.com>Wiki</a></li></ul><ul class="menu__inner menu__inner--mobile"><li><a href=/zh/posts>博文</a></li><li><a href=/zh/categories>分类</a></li><li><a href=/zh/tags>标签</a></li><li><a href=https://wiki.tgc54.com>Wiki</a></li></ul></nav><span class=menu-trigger><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg></span><span class=theme-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-half-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="12" cy="12" r="9"/><path d="M12 3v18"/><path d="M12 14l7-7"/><path d="M12 19l8.5-8.5"/><path d="M12 9l4.5-4.5"/></svg></span><span class=lang-toggle><div class="dropdown menu__sub-inner"><div class=link><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-world" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="12" cy="12" r="9"/><line x1="3.6" y1="9" x2="20.4" y2="9"/><line x1="3.6" y1="15" x2="20.4" y2="15"/><path d="M11.5 3a17 17 0 000 18"/><path d="M12.5 3a17 17 0 010 18"/></svg></div><ul class=menu__sub-inner-more><li><a href=https://tgc54.com/zh/posts/multi-pattern-matching/>简体中文</a></li></ul></div></span></span></span></header><div class=content><div class=post><h1 class=post-title>多模式串匹配的3种方法</h1><div class=post-meta><span class=post-date>2021-06-29</span></div><span class=post-tags><a href=https://tgc54.com/zh/tags/%E5%93%88%E5%B8%8C/>#哈希</a>&nbsp;
 <a href=https://tgc54.com/zh/tags/ac%E8%87%AA%E5%8A%A8%E6%9C%BA/>#AC自动机</a>&nbsp;
 <a href=https://tgc54.com/zh/tags/%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BA/>#后缀自动机</a>&nbsp;</span><div class=post-content><p>例题： <a href=https://open.kattis.com/problems/anothersubstringqueryproblem>Another Substring Query Problem</a></p><p>由于次题中模式串有重复，会影响时间复杂度，所以我们要提前处理相同的字符串。下面的方法均假设无重复模式串。并以$n$为模式串的总长度，$m$为文本串的长度。</p><h2 id=方法一字符串哈希>方法一：字符串哈希
-<a href=#%e6%96%b9%e6%b3%95%e4%b8%80%e5%ad%97%e7%ac%a6%e4%b8%b2%e5%93%88%e5%b8%8c class=h-anchor aria-hidden=true>#</a></h2><p>由于总长为$n$的模式串最多只有$O(\sqrt{n})$种长度，所以我们可以遍历每种长度$l$然后遍历每个位置$i$然后判断从$i$开始长度为$l$的子串是否是模式串。时间复杂度为$O(\sqrt{n}m)$。</p><div class=collapsable-code><input id=674153289 type=checkbox checked>
-<label for=674153289><span class=collapsable-code__language>cpp</span>
+<a href=#%e6%96%b9%e6%b3%95%e4%b8%80%e5%ad%97%e7%ac%a6%e4%b8%b2%e5%93%88%e5%b8%8c class=h-anchor aria-hidden=true>#</a></h2><p>由于总长为$n$的模式串最多只有$O(\sqrt{n})$种长度，所以我们可以遍历每种长度$l$然后遍历每个位置$i$然后判断从$i$开始长度为$l$的子串是否是模式串。时间复杂度为$O(\sqrt{n}m)$。</p><div class=collapsable-code><input id=128794536 type=checkbox checked>
+<label for=128794536><span class=collapsable-code__language>cpp</span>
 <span class=collapsable-code__title>代码</span>
 <span class=collapsable-code__toggle data-label-expand=△ data-label-collapse=▽></span></label><pre class=language-cpp><code>
 #include &lt;bits/stdc&#43;&#43;.h&gt;
@@ -84,8 +84,8 @@ int main() {
         cout &lt;&lt; x &lt;&lt; &#39;\n&#39;;
 }
 </code></pre></div><h2 id=方法二ac自动机>方法二：AC自动机
-<a href=#%e6%96%b9%e6%b3%95%e4%ba%8cac%e8%87%aa%e5%8a%a8%e6%9c%ba class=h-anchor aria-hidden=true>#</a></h2><p>先将所有模式串加入AC自动机，然后再匹配文本串。注意AC自动机中要维护output link（沿fail link跳转时第一个模式串）。时间复杂度$O(n+m+m\sqrt{n})$。</p><div class=collapsable-code><input id=819543762 type=checkbox checked>
-<label for=819543762><span class=collapsable-code__language>cpp</span>
+<a href=#%e6%96%b9%e6%b3%95%e4%ba%8cac%e8%87%aa%e5%8a%a8%e6%9c%ba class=h-anchor aria-hidden=true>#</a></h2><p>先将所有模式串加入AC自动机，然后再匹配文本串。注意AC自动机中要维护output link（沿fail link跳转时第一个模式串）。时间复杂度$O(n+m+m\sqrt{n})$。</p><div class=collapsable-code><input id=463928175 type=checkbox checked>
+<label for=463928175><span class=collapsable-code__language>cpp</span>
 <span class=collapsable-code__title>代码</span>
 <span class=collapsable-code__toggle data-label-expand=△ data-label-collapse=▽></span></label><pre class=language-cpp><code>
 #include &lt;bits/stdc&#43;&#43;.h&gt;
@@ -197,8 +197,8 @@ int main() {
         cout &lt;&lt; x &lt;&lt; &#39;\n&#39;;
 }
 </code></pre></div><h2 id=方法三后缀数据结构>方法三：后缀数据结构
-<a href=#%e6%96%b9%e6%b3%95%e4%b8%89%e5%90%8e%e7%bc%80%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84 class=h-anchor aria-hidden=true>#</a></h2><p>后缀数据结构也能是很擅长字符串匹配的，后缀树和后缀自动机都可以解决本题，由于没学过后缀树就只写后缀自动机的做法了：</p><p><a href=https://cp-algorithms.com/string/suffix-automaton.html#toc-tgt-21>英文原文</a></p><p><a href=https://oi-wiki.org/string/sam/#_20>中文翻译</a></p><p>注意后缀自动机是这三种做法中唯一可以在线处理询问的做法，处理单次询问的时间复杂度为$O(|s|+occurrence)$，occurrence为出现次数。整体时间复杂度$O(m+n+m\sqrt{n})$。</p><div class=collapsable-code><input id=942568371 type=checkbox checked>
-<label for=942568371><span class=collapsable-code__language>cpp</span>
+<a href=#%e6%96%b9%e6%b3%95%e4%b8%89%e5%90%8e%e7%bc%80%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84 class=h-anchor aria-hidden=true>#</a></h2><p>后缀数据结构也能是很擅长字符串匹配的，后缀树和后缀自动机都可以解决本题，由于没学过后缀树就只写后缀自动机的做法了：</p><p><a href=https://cp-algorithms.com/string/suffix-automaton.html#toc-tgt-21>英文原文</a></p><p><a href=https://oi-wiki.org/string/sam/#_20>中文翻译</a></p><p>注意后缀自动机是这三种做法中唯一可以在线处理询问的做法，处理单次询问的时间复杂度为$O(|s|+occurrence)$，occurrence为出现次数。整体时间复杂度$O(m+n+m\sqrt{n})$。</p><div class=collapsable-code><input id=716325894 type=checkbox checked>
+<label for=716325894><span class=collapsable-code__language>cpp</span>
 <span class=collapsable-code__title>代码</span>
 <span class=collapsable-code__toggle data-label-expand=△ data-label-collapse=▽></span></label><pre class=language-cpp><code>
 #include &lt;bits/extc&#43;&#43;.h&gt;
