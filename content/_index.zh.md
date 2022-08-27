@@ -1,12 +1,11 @@
 ---
 ---
+
+{{< image src="/img/ppf.png" alt="ppf" position="right" style="width: 150px; border-radius: 8px; float: right;" >}}
 # 大家好啊
 
-- Also known online as @Thallium54
-- Back End Developer intern @ IBM
-- CS student @ York University
-- Tech things that I enjoy: software development, home server, Linux...
-- Competitive programming enthusiast
-- Some of my other hobbies: Rubik’s cube, custom (ergonomic) mechanical keyboard, table tennis.
-- Languages: C/C++, Python, Go, JS, Java, Lua
-
+- 网名：种辣条/Thallium54
+- 喜欢的东西：开发、服务器、Linux、算法竞赛、魔方、机械键盘、乒乓球。
+- 语言: C/C++, Python, Rust, Go, JS, Java
+- 可以在以下平台找到我：
+    - [GitHub](https://github.com/thallium), [bilibili](https://space.bilibili.com/3019370), [Codeforces](https://codeforces.com/profile/Thallium54)，[Instagram](https://www.instagram.com/thallium54/)
