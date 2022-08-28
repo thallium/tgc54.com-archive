@@ -25,7 +25,7 @@ There is problem managing python version with your package manager. An easy solu
 2. Install desired python version: `pyenv install <version>`
 3. Set global python version `pyenv global <version>`
 4. Set up your shell environment for Pyenv, for zsh, add this to your `.zshrc`:
-```sh
+```bash
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
