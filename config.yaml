@@ -6,6 +6,13 @@ hasCJKLanguage: true
 
 baseURL: 'https://tgc54.com'
 
+markup:
+  highlight:
+    noclasses: false
+
+params:
+  contentTypeName: posts
+
 
 languages:
   en:
