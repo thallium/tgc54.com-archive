@@ -6,8 +6,8 @@ Thallium54</title><meta charset=utf-8><meta name=viewport content="width=device-
 <span class=header__right><nav class=menu><ul class="menu__inner menu__inner--desktop"><li><a href=/zh/posts>博文</a></li><li><a href=/zh/categories>分类</a></li><li><a href=/zh/tags>标签</a></li><li><a href=https://wiki.tgc54.com>Wiki</a></li></ul><ul class="menu__inner menu__inner--mobile"><li><a href=/zh/posts>博文</a></li><li><a href=/zh/categories>分类</a></li><li><a href=/zh/tags>标签</a></li><li><a href=https://wiki.tgc54.com>Wiki</a></li></ul></nav><span class=menu-trigger><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg></span><span class=theme-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-half-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="12" cy="12" r="9"/><path d="M12 3v18"/><path d="M12 14l7-7"/><path d="M12 19l8.5-8.5"/><path d="M12 9l4.5-4.5"/></svg></span><span class=lang-toggle><div class="dropdown menu__sub-inner"><div class=link><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-world" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="12" cy="12" r="9"/><line x1="3.6" y1="9" x2="20.4" y2="9"/><line x1="3.6" y1="15" x2="20.4" y2="15"/><path d="M11.5 3a17 17 0 000 18"/><path d="M12.5 3a17 17 0 010 18"/></svg></div><ul class=menu__sub-inner-more><li><a href=https://tgc54.com/zh/posts/2021-ecna/>简体中文</a></li></ul></div></span></span></span></header><div class=content><div class=post><h1 class=post-title>2021 ECNA区域赛总结与题解</h1><div class=post-meta><span class=post-date>2022-02-26</span></div><div class=post-content><p>差不多最后一年了，明年队友估计就都毕业了，看看能不能找到其他人吧，或者solo也行？</p><h2 id=总结>总结
 <a href=#%e6%80%bb%e7%bb%93 class=h-anchor aria-hidden=true>#</a></h2><p>今年由于疫情依然不能去温莎线下比赛，但相比去年三人三机今天变成了更像线下的三人一机，不过是在各自学校比赛，但令人不能理解是的居然一点监控措施都没有，全凭自己自觉和教练监督。。。。可以理解为摆烂吧😂。我们队算是做到了遵循规则，除了多接了一个显示器用来看代码（自己电脑没法连机房的打印机），以及我还是用的自己的键盘（用40%配列太久了改不回来了）。</p><p><a href=https://ecna21.kattis.com/standings>排名</a>有点出乎意料，考虑到队友忙于实习从不训练、我上了大三之后课程难度增加，只能靠每周cf维持一点做题量，这个排名已经很满意了，毕竟如果按NAC晋级规则按学校排名是第6，校排名要是第5的话总排名要第6，完全想peach😂。</p><p>整场比赛还是比较流畅的，基本没有卡太长时间，A题作为比较简单的题卡了有点久，最后还是靠猜结论过的，F计算几何某队友到最后也没搞出来，不过没占用太多正常时间。时间再稍微多一点也许能搞搞I或者K，不过到最后也比有点累了，昨晚也只睡了5个半小时。</p><h2 id=题目>题目
 <a href=#%e9%a2%98%e7%9b%ae class=h-anchor aria-hidden=true>#</a></h2><p>题目整体难度适中？比去年难一点，（读了的题）以思维题为主。除了J题摆烂出了最大子矩形原题，题目质量还可以？</p><h3 id=a>A
-<a href=#a class=h-anchor aria-hidden=true>#</a></h3><p>一开始wa是因为忘了考虑相加的转移。考虑加的话要遍历一遍整个dp数组，时间复杂度会变成$O(n^2)$，但其实也能过因为时间给了15s。。。（我tm写博客的时候才发现）。但貌似只要遍历前面一些数就行了，因为数大的时候乘肯定比加划算。</p><div class=collapsable-code><input id=521689734 type=checkbox checked>
-<label for=521689734><span class=collapsable-code__language>cpp</span>
+<a href=#a class=h-anchor aria-hidden=true>#</a></h3><p>一开始wa是因为忘了考虑相加的转移。考虑加的话要遍历一遍整个dp数组，时间复杂度会变成$O(n^2)$，但其实也能过因为时间给了15s。。。（我tm写博客的时候才发现）。但貌似只要遍历前面一些数就行了，因为数大的时候乘肯定比加划算。</p><div class=collapsable-code><input id=896132475 type=checkbox checked>
+<label for=896132475><span class=collapsable-code__language>cpp</span>
 <span class=collapsable-code__title>代码</span>
 <span class=collapsable-code__toggle data-label-expand=△ data-label-collapse=▽></span></label><pre class=language-cpp><code>
 
@@ -41,8 +41,8 @@ int main() {
     cout &lt;&lt; dp[n] &lt;&lt; endl;
 }
 </code></pre></div><h3 id=b>B
-<a href=#b class=h-anchor aria-hidden=true>#</a></h3><p>赛时无脑敲了个lca，但其实稍微再想想就有更简单的做法：dfs时维护到根节点的距离以及最短的两条到叶子的路径的举例即可。</p><div class=collapsable-code><input id=629473851 type=checkbox checked>
-<label for=629473851><span class=collapsable-code__language>cpp</span>
+<a href=#b class=h-anchor aria-hidden=true>#</a></h3><p>赛时无脑敲了个lca，但其实稍微再想想就有更简单的做法：dfs时维护到根节点的距离以及最短的两条到叶子的路径的举例即可。</p><div class=collapsable-code><input id=897532461 type=checkbox checked>
+<label for=897532461><span class=collapsable-code__language>cpp</span>
 <span class=collapsable-code__title>代码</span>
 <span class=collapsable-code__toggle data-label-expand=△ data-label-collapse=▽></span></label><pre class=language-cpp><code>
 #include &lt;bits/stdc&#43;&#43;.h&gt;
@@ -97,8 +97,8 @@ int main() {
     cout &lt;&lt; ans &lt;&lt; endl;
 }
 </code></pre></div><h3 id=g>G
-<a href=#g class=h-anchor aria-hidden=true>#</a></h3><p>签到题，枚举所有前缀以及交换顺序即可</p><div class=collapsable-code><input id=381654792 type=checkbox checked>
-<label for=381654792><span class=collapsable-code__language>cpp</span>
+<a href=#g class=h-anchor aria-hidden=true>#</a></h3><p>签到题，枚举所有前缀以及交换顺序即可</p><div class=collapsable-code><input id=539178264 type=checkbox checked>
+<label for=539178264><span class=collapsable-code__language>cpp</span>
 <span class=collapsable-code__title>代码</span>
 <span class=collapsable-code__toggle data-label-expand=△ data-label-collapse=▽></span></label><pre class=language-cpp><code>
 #include &lt;bits/stdc&#43;&#43;.h&gt;
@@ -134,8 +134,8 @@ int main() {
     }
 }
 </code></pre></div><h3 id=j>J
-<a href=#j class=h-anchor aria-hidden=true>#</a></h3><p>经典最大子矩阵，单调栈搞搞即可。其实我赛时已经基本忘了怎么做了，只记得是是单调栈，想了半天才想出来正解，这下应该以后忘不了了233</p><div class=collapsable-code><input id=436285179 type=checkbox checked>
-<label for=436285179><span class=collapsable-code__language>cpp</span>
+<a href=#j class=h-anchor aria-hidden=true>#</a></h3><p>经典最大子矩阵，单调栈搞搞即可。其实我赛时已经基本忘了怎么做了，只记得是是单调栈，想了半天才想出来正解，这下应该以后忘不了了233</p><div class=collapsable-code><input id=526748193 type=checkbox checked>
+<label for=526748193><span class=collapsable-code__language>cpp</span>
 <span class=collapsable-code__title>代码</span>
 <span class=collapsable-code__toggle data-label-expand=△ data-label-collapse=▽></span></label><pre class=language-cpp><code>
 #include &lt;bits/stdc&#43;&#43;.h&gt;
@@ -183,8 +183,8 @@ int main() {
     cout &lt;&lt; s &#43; 1 &lt;&lt; &#39; &#39; &lt;&lt; e &#43; 1 &lt;&lt; &#39; &#39; &lt;&lt; ans &lt;&lt; endl;
 }
 </code></pre></div><h3 id=l>L
-<a href=#l class=h-anchor aria-hidden=true>#</a></h3><p>枚举四个角然后排序分层搞一搞，队友写的</p><div class=collapsable-code><input id=753826194 type=checkbox checked>
-<label for=753826194><span class=collapsable-code__language>python</span>
+<a href=#l class=h-anchor aria-hidden=true>#</a></h3><p>枚举四个角然后排序分层搞一搞，队友写的</p><div class=collapsable-code><input id=794568123 type=checkbox checked>
+<label for=794568123><span class=collapsable-code__language>python</span>
 <span class=collapsable-code__title>代码</span>
 <span class=collapsable-code__toggle data-label-expand=△ data-label-collapse=▽></span></label><pre class=language-python><code>
 import collections
@@ -234,8 +234,8 @@ for keys, ret in (keys1, ret1), (reversed(keys1), ret1), (keys2, ret2), (reverse
 print(moved)
 ```
 </code></pre></div><h3 id=m>M
-<a href=#m class=h-anchor aria-hidden=true>#</a></h3><p>最短路考虑用bfs，把所有字符串放入一个trie就可以很容易知道哪些方向可以走了，所以状态就是[x][y][trie中的节点的位置][上一步的方向]。除了状态复杂点其他就是正常bfs的套路，注意如果当前在单词结尾的位置，下一步即可以回到trie的根，又可以继续顺着trie走。</p><div class=collapsable-code><input id=841635279 type=checkbox checked>
-<label for=841635279><span class=collapsable-code__language>cpp</span>
+<a href=#m class=h-anchor aria-hidden=true>#</a></h3><p>最短路考虑用bfs，把所有字符串放入一个trie就可以很容易知道哪些方向可以走了，所以状态就是[x][y][trie中的节点的位置][上一步的方向]。除了状态复杂点其他就是正常bfs的套路，注意如果当前在单词结尾的位置，下一步即可以回到trie的根，又可以继续顺着trie走。</p><div class=collapsable-code><input id=624387951 type=checkbox checked>
+<label for=624387951><span class=collapsable-code__language>cpp</span>
 <span class=collapsable-code__title>代码</span>
 <span class=collapsable-code__toggle data-label-expand=△ data-label-collapse=▽></span></label><pre class=language-cpp><code>
 #include &lt;bits/stdc&#43;&#43;.h&gt;
