@@ -17,6 +17,7 @@ params:
 languages:
   en:
     title: "Thallium54"
+    contentDir: content/en
     menu:
       main:
         - identifier: "posts"
