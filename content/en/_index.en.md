@@ -1,8 +1,9 @@
 ---
 ---
+{{< image src="/img/ppf.png" alt="ppf" position="right" style="width: 6rem; border-radius: 8px; float: right;" >}}
 # Hi, there
 
-- Also known online as @Thallium54
+- I'm Gengchen, also known online as @Thallium54
 - Back End Developer intern @ IBM
 - CS student @ York University
     - B.Sc., Hons. Computer Science, 2019 - 2024
@@ -57,4 +58,3 @@
     - 2021 ICPC North America Division Championships ([scoreboard](https://nadc21.kattis.com/standings?filter=3557)): 59th/170 overall, 6th/42 in central division
     - 2020 East Central NA Regional Contest ([scoreboard](https://ecna20.kattis.com/standings)): 22th/67
     - 2019 East Central NA Regional Contest ([scoreboard](https://ecna19.kattis.com/standings)): 34th/90
-

@@ -1,7 +1,7 @@
 ---
 ---
 
-{{< image src="/img/ppf.png" alt="ppf" position="right" style="width: 150px; border-radius: 8px; float: right;" >}}
+{{< image src="/img/ppf.png" alt="ppf" position="right" style="width: 6rem; border-radius: 8px; float: right;" >}}
 # 大家好啊
 
 - 网名：种辣条/Thallium54
