@@ -41,6 +41,7 @@ languages:
         logoText: Thallium54
         logoHomeLink: '/'
       langName: English
+      allPosts: All Posts
   zh:
     title: "Thallium54"
     contentDir: content/zh
@@ -67,3 +68,4 @@ languages:
         logoText: Thallium54
         logoHomeLink: '/zh'
       langName: 简体中文
+      allPosts: 全部博文
