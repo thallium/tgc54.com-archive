@@ -2,6 +2,7 @@
 title: "AtCoder Beginner Contest 266 G 题解"
 date: 2022-08-29T21:16:32-04:00
 summary: "学了二项式反演"
+keywords: [ABC266, ABC266G, "AtCoder Beginner Contest 266", "AtCoder Beginner Contest 266 G"]
 tags: [AtCoder,数学,组合数学,二项式反演]
 categories: [题解]
 ---
