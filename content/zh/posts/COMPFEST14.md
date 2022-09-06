@@ -1,5 +1,5 @@
 ---
-title: "COMPFEST 14部分题解（ABCFGHKLM）"
+title: "COMPFEST 14部分题解（ABCEFGHKLM）"
 date: 2022-09-04T19:00:40-04:00
 summary: "难度适中的比赛"
 keywords: ["COMPFEST 14"]
@@ -18,6 +18,249 @@ categories: ["比赛题解"]
 
 直径所对圆周角为90度，所以当直径上两个点颜色相同时，其他的点不能与直径的颜色相同。设直径的条数为 $d$，于是我们可以枚举直径颜色相同的条数 $k$，首先选 $k$条直径，然后为每条直径选一个颜色，然后从剩下的 $M - k$ 个颜色中给剩下的每条直径选两个颜色，再从剩下的 $M - k$个颜色中给每个剩下的非直径的点选一个颜色，所以答案为:
 $$\sum_{k=0}^{\min(d, M)} {d \choose k}{M \choose k}k!\left({M - k \choose 2}\cdot 2!\right)^{d - k}(M - i)^{N - 2 * d}$$
+
+## E. Electrical Efficiency
+
+考虑每条边对答案的贡献，遍历所有质数，设当前的质数为 $p$，令 $S$ 为因子含 $p$ 的点的集合，当 $x, y, z\in S$ 中任意两点的路径经过某条边时，该边会对答案产生1的贡献。以任意点为根，对边 $(u, v)$ （$u$ 为 $v$ 的父亲）来说，有$\binom{|S|}{3} - \binom{s}{3} - \binom{|S|-s}{3}$（$s$ 为 $v$ 子树的大小）个三元组经过这条边，用树型dp就能求解，但要是对于每个质数都遍历一遍整个树的话必然要超时所以我们以 $S$ 中的点构造虚树，在虚树上跑dp，由于 $A_x$ 最多有 $\log(A_x)$ 个不重复的质因子，所以所有 $|S|$ 的和是 $O(N\log(\max(A)))$ 的。
+
+{{< code language="cpp" title="代码" isCollapsed="true" >}}
+#include <bits/stdc++.h>
+
+constexpr unsigned lg(int x) {
+    return sizeof(int) * 8 - 1 - __builtin_clz(x);
+}
+constexpr unsigned lg(unsigned int x) {
+    return sizeof(unsigned) * 8 - 1 - __builtin_clz(x);
+}
+constexpr unsigned lg(long x) {
+    return sizeof(long) * 8 - 1 - __builtin_clzl(x);
+}
+constexpr unsigned lg(unsigned long x) {
+    return sizeof(unsigned long) * 8 - 1 - __builtin_clzl(x);
+}
+constexpr unsigned lg(long long x) {
+    return sizeof(long long) * 8 - 1 - __builtin_clzll(x);
+}
+constexpr unsigned lg(unsigned long long x) {
+    return sizeof(unsigned long long) * 8 - 1 - __builtin_clzll(x);
+}
+constexpr unsigned ceil_lg(int n) {
+    return n == 0 ? 0 : 32 - __builtin_clz(n - 1);
+}
+
+template <typename T> struct SparseTable {
+    size_t n, logn;
+    std::vector<std::vector<T>> v;
+    std::function<T(T, T)> F;
+    SparseTable() = default;
+    SparseTable(const std::vector<T> &a, std::function<T(T, T)> func)
+        : n(a.size()), logn(lg(n)), v(logn + 1, std::vector<T>(n + 1)), F(func) {
+        v[0] = a;
+        for (size_t i = 1; i <= logn; i++)
+            for (size_t j = 0; j + (1 << i) - 1 < n; j++)
+                v[i][j] = F(v[i - 1][j], v[i - 1][j + (1 << (i - 1))]);
+    }
+    T query(size_t l, size_t r) {
+        assert(l < r);
+        assert(l < n);
+        assert(r <= n);
+        int s = lg(r - l);
+        return F(v[s][l], v[s][r - (1 << s)]);
+    }
+};
+
+struct EulerLCA {
+    int n;
+    std::vector<int> pos, seq, dep;
+    SparseTable<int> st;
+    EulerLCA(const std::vector<std::vector<int>>& g, int root) : n(g.size()), pos(n), dep(n) {
+        seq.reserve(2 * n);
+        dfs(root, root, g);
+        st = SparseTable<int>(seq, [&](int u, int v) { return pos[u] < pos[v] ? u : v; });
+    }
+    void dfs(int u, int p, const std::vector<std::vector<int>>& g) {
+        pos[u] = seq.size();
+        seq.push_back(u);
+        for (auto v : g[u]) {
+            if (v == p) continue;
+            dep[v] = dep[u] + 1;
+            dfs(v, u, g);
+            seq.push_back(u);
+        }
+    }
+    int lca(int u, int v) {
+        if (pos[u] > pos[v]) std::swap(u, v);
+        return st.query(pos[u], pos[v] + 1);
+    }
+};
+struct VirtualTree {
+    int n;
+    EulerLCA lca;
+    std::vector<std::vector<int>> tree;
+    VirtualTree(const std::vector<std::vector<int>> &g, int root)
+        : n(g.size()), lca(g, root), tree(n) {}
+    auto build_tree(const std::vector<int> &vertices)
+        -> std::pair<int, const std::vector<std::vector<int>> &> {
+        auto v(vertices);
+        std::sort(v.begin(), v.end(), [&](int u, int v) { return lca.pos[u] < lca.pos[v]; });
+        int len = v.size();
+        for (int i = 1; i < len; i++) {
+            v.push_back(lca.lca(v[i - 1], v[i]));
+        }
+        std::sort(v.begin(), v.end(), [&](int u, int v) { return lca.pos[u] < lca.pos[v]; });
+        v.erase(std::unique(v.begin(), v.end()), v.end());
+        for (int i = 1; i < (int)v.size(); i++) {
+            tree[lca.lca(v[i - 1], v[i])].push_back(v[i]);
+        }
+        return {v[0], tree};
+    }
+    void clear(const std::vector<int> v) {
+        for (auto u : v) {
+            tree[u].clear();
+        }
+    }
+    void clear(int root) {
+        for (auto v : tree[root]) {
+            clear(v);
+        }
+        tree[root].clear();
+    }
+};
+template <typename mint> struct Factorial {
+    std::vector<mint> fac, invfac;
+    Factorial(int n) : fac(n + 1), invfac(n + 1) {
+        fac[0] = 1;
+        for (int i = 1; i <= n; i++) {
+            fac[i] = fac[i - 1] * i;
+        }
+        invfac[n] = fac[n].inv();
+        for (int i = n - 1; i >= 0; i--) {
+            invfac[i] = invfac[i + 1] * (i + 1);
+        }
+    }
+    mint C(int n, int k) {
+        if (k < 0 || k > n) return 0;
+        assert((int)size(fac) > n);
+        return fac[n] * invfac[n - k] * invfac[k];
+    }
+    mint P(int n, int m) {
+        assert(!fac.empty());
+        return fac[n] * invfac[n - m];
+    }
+    template<typename... Args>
+    constexpr mint eval(Args... args) {
+        return ((args > 0 ? fac[args] : invfac[-args]) * ...);
+    }
+};
+using namespace std;
+using ll = long long;
+template <int MOD>
+struct ModInt {
+    int val;
+    ModInt(ll v = 0) : val(v % MOD) { if (val < 0) val += MOD; };
+    ModInt operator+() const { return ModInt(val); }
+    ModInt operator-() const { return ModInt(MOD - val); }
+    ModInt inv() const {
+        auto a = val, m = MOD, u = 0, v = 1;
+        while (a != 0) { auto t = m / a; m -= t * a; swap(a, m); u -= t * v; swap(u, v); }
+        assert(m == 1);
+        return u;
+    }
+    ModInt pow(ll n) const {
+        auto x = ModInt(1);
+        auto b = *this;
+        while (n > 0) {
+            if (n & 1) x *= b;
+            n >>= 1;
+            b *= b;
+        }
+        return x;
+    }
+    friend ModInt operator+ (ModInt lhs, const ModInt& rhs) { return lhs += rhs; }
+    friend ModInt operator- (ModInt lhs, const ModInt& rhs) { return lhs -= rhs; }
+    friend ModInt operator* (ModInt lhs, const ModInt& rhs) { return lhs *= rhs; }
+    friend ModInt operator/ (ModInt lhs, const ModInt& rhs) { return lhs /= rhs; }
+    ModInt& operator+=(const ModInt& x) { if ((val += x.val) >= MOD) val -= MOD; return *this; }
+    ModInt& operator-=(const ModInt& x) { if ((val -= x.val) < 0) val += MOD; return *this; }
+    ModInt& operator*=(const ModInt& x) { val = int64_t(val) * x.val % MOD; return *this; }
+    ModInt& operator/=(const ModInt& x) { return *this *= x.inv(); }
+    bool operator==(const ModInt& b) const { return val == b.val; }
+    bool operator!=(const ModInt& b) const { return val != b.val; }
+    friend std::istream& operator>>(std::istream& is, ModInt& x) noexcept { return is >> x.val; }
+    friend std::ostream& operator<<(std::ostream& os, const ModInt& x) noexcept { return os << x.val; }
+};
+using mint = ModInt<998244353>;
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    int mx = 0;
+    for (auto& x : a) {
+        cin >> x;
+        mx = max(mx, x);
+    }
+    vector<int> minp(mx + 1), primes;
+    for (int i = 2; i <= mx; i++) {
+        if (minp[i] == 0) {
+            minp[i] = i;
+            primes.push_back(i);
+        }
+        for (auto p : primes) {
+            if (i * p > mx) {
+                break;
+            }
+            minp[i * p] = p;
+            if (i % p == 0) {
+                break;
+            }
+        }
+    }
+    vector<vector<int>> p(mx + 1);
+    for (int i = 0; i < n; i++) {
+        int x = a[i];
+        while (x > 1) {
+            int f = minp[x];
+            p[f].push_back(i);
+            while (x % f == 0) {
+                x /= f;
+            }
+        }
+    }
+    vector<vector<int>> g(n);
+    for (int i = 1; i < n; i++) {
+        int u, v;
+        cin >> u >> v;
+        u--, v--;
+        g[u].push_back(v);
+        g[v].push_back(u);
+    }
+    VirtualTree tr(g, 0);
+    Factorial<mint> f(n);
+    mint ans = 0;
+    for (int fac = 1; fac <= mx; fac++) {
+        if (p[fac].size() < 3) {
+            continue;
+        }
+        auto res = tr.build_tree(p[fac]);
+        auto root = res.first;
+        const auto& tree = res.second;
+        auto dfs = [&](auto& slf, int u) -> int {
+            int size = a[u] % fac == 0;
+            for (auto v : tree[u]) {
+                int sz = slf(slf, v);
+                size += sz;
+                ans += (tr.lca.dep[v] - tr.lca.dep[u]) * (f.C(p[fac].size(), 3) - f.C(sz, 3) - f.C(p[fac].size() - sz, 3));
+            }
+            return size;
+        };
+        dfs(dfs, root);
+        tr.clear(root);
+    }
+    cout << ans << '\n';
+}
+{{< /code >}}
 
 ## F. Field Photography
 
@@ -90,6 +333,43 @@ $$\begin{align*} \text{concat}(A_i, A_j) \times \text{concat}(A_j, A_i) + A_i A_
 然后可以发现 $A_i^2\bmod 3$ 只可能是0或者1。于是我们得到两种情况：
 - 如果 $A_i^2\bmod 3 = 0$ 的石头的个数小于等于$\frac N 2$的话，将所有 $A_i^2\bmod 3 = 0$ 的时候分到一组并取$Z=2$就可以避免上述等式成立。
 - 否则 $A_i^2\bmod 3 = 1$ 的石头的个数小于等于$\frac N 2$，类似地我们将$A_i^2\bmod 3 = 1$ 的石头分到一组并取$Z=0$。
+
+{{< code language="cpp" title="代码" isCollapsed="true" >}}
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int n;
+    cin >> n;
+    vector<vector<int>> a(2);
+    for (int i = 0; i < n; i++) {
+        int x;
+        cin >> x;
+        if (x % 3 == 0) {
+            a[0].push_back(i);
+        } else {
+            a[1].push_back(i);
+        }
+    }
+    string ans(n, '0');
+    if (a[0].size() <= n / 2) {
+        cout << "0\n";
+        for (auto& x : a[0]) ans[x] = '1';
+        for (int i = 0; i < n / 2 - a[0].size(); i++){
+            ans[a[1][i]] = '1';
+        }
+    } else {
+        cout << "2\n";
+        for (auto& x : a[1]) ans[x] = '1';
+        for (int i = 0; i < n / 2 - a[1].size(); i++){
+            ans[a[0][i]] = '1';
+        }
+    }
+    cout << ans << endl;
+}
+{{< /code >}}
 
 ## K. Kingdom of Criticism
 
