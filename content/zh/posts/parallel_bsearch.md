@@ -60,7 +60,7 @@ void solve(int l, int r, vector<int> id) {
 
 常见的写法是用两个数组存左边和右边的询问，但其实可以直接利用`std::partition`或者`std::stable_partition`直接在原数组上划分，内存和时间上都更优（时间少10%左右，内存少30%左右），而且个人感觉写起来更简洁一些？后面所有题都有partition的写法，部分有数组的写法，选择自己喜欢的即可。
 
-{{% code language="cpp" title="代码" isCollapsed="true" %}}
+{{< code language="cpp" title="代码" isCollapsed="true" >}}
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -149,7 +149,7 @@ int main() {
     solve(solve, 0, (int)comp.size(), a.begin(), a.end(), Q.begin(), Q.end());
     for (auto x : ans) cout<<comp[x]<<'\n';
 }
-{{% /code %}}
+{{< /code >}}
 
 ### 动态区间第k小
 
@@ -157,7 +157,7 @@ int main() {
 
 修改无非就是把原来的数删掉（在辅助数组中减1），再加上修改之后的数，和上一题大同小异。区别是由于有了时间顺序，不能像上一题先修改再询问了，要把修改和询问放在一个数组（其实上一题也能放在一个数组里，只是为了方便理解分成了两个数组），而且要用`std::stable_partition`以保证相对时间顺序不变。
 
-{{% code language="cpp" title="代码1（partition）" isCollapsed="true" %}}
+{{< code language="cpp" title="代码1（partition）" isCollapsed="true" >}}
 #include <algorithm>
 #include <bits/stdc++.h>
 
@@ -265,9 +265,9 @@ int main() {
     for (auto x : ans)
         cout << comp[x] << '\n';
 }
-{{% /code %}}
+{{< /code >}}
 
-{{% code language="cpp" title="代码2（数组）" isCollapsed="true" %}}
+{{< code language="cpp" title="代码2（数组）" isCollapsed="true" >}}
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -374,7 +374,7 @@ int main() {
     for (auto x : ans)
         cout << comp[x] << '\n';
 }
-{{% /code %}}
+{{< /code >}}
 
 ### [ZJOI2013]K大数查询
 
@@ -382,7 +382,7 @@ int main() {
 
 $[l, r]$中每个集合加入一个数就相当于在辅助数组中$[l, r]$的位置上加1,所以我们需要一个可以区间加的数据结构，最简单的就是树状数组啦。其他和上一题没区别。
 
-{{% code language="cpp" title="代码" isCollapsed="true" %}}
+{{< code language="cpp" title="代码" isCollapsed="true" >}}
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -476,7 +476,7 @@ int main() {
     for (auto x : ans)
         cout << comp[x] << '\n';
 }
-{{% /code %}}
+{{< /code >}}
 
 ### Meteors
 
@@ -490,7 +490,7 @@ int main() {
 - 递归两个修改区间
 
 
-{{% code language="cpp" title="核心函数(数组)" isCollapsed="true" %}}
+{{< code language="cpp" title="核心函数(数组)" isCollapsed="true" >}}
 // 修改的范围是[low, high], 答案在[low, high]中的询问存在members里
 auto solve = [&](auto & solve, int low, int high, vector<int> &members) {
     if (members.empty() && low == high) { // 区间长度为1,或者没有符合条件的询问
@@ -525,10 +525,10 @@ auto solve = [&](auto & solve, int low, int high, vector<int> &members) {
     solve(solve, mid + 1, high, right);
     vector<int>().swap(right);
 };
-{{% /code %}}
+{{< /code >}}
 <br/>
 
-{{% code language="cpp" title="核心函数(partition)" isCollapsed="true" %}}
+{{< code language="cpp" title="核心函数(partition)" isCollapsed="true" >}}
 // 修改的范围是[low, high], 符合条件的询问的区间是[begin, end)，begin和end是迭代器，方便传给partition.
 auto solve=[&](auto& solve, int low, int high, auto begin, auto end) {
     if (begin==end || low==high) {
@@ -558,11 +558,11 @@ auto solve=[&](auto& solve, int low, int high, auto begin, auto end) {
     solve(solve, low, mid, begin, m);
     solve(solve, mid+1, high, m, end);
 };
-{{% /code %}}
+{{< /code >}}
 
 <br/>
 
-{{% code language="cpp" title="完整代码" isCollapsed="true" %}}
+{{< code language="cpp" title="完整代码" isCollapsed="true" >}}
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -661,7 +661,7 @@ int main() {
         else cout<<"NIE\n";
     }
 }
-{{% /code %}}
+{{< /code >}}
 
 
 ### AGC002D Stamp Rally
@@ -670,7 +670,7 @@ int main() {
 
 这题思路其实不难，假设当前答案在$[l, r]$内，令$mid=(l+r)/2$，将编号从0到mid的边放入并查集中然后判断连通块大小即可，但问题是这题的目标修改不了，没法像前面的题一样减掉前面的贡献，而每次加边如果都从0到mid的话时间会爆炸，所以要尽可能利用并查集之前的信息，所以我们将递归改成用队列实现，这样区间的顺序就变成了从小到大，就可以很好的利用之前的信息，只有区间到头了的时候才会清空并查集。如果把区间想象成一棵线段树的话，前面的递归可以看成dfs,队列就是bfs,由于树高是$\log(n)$的，所以时间是$O(n\log(n))$的。
 
-{{% code language="cpp" title="代码" isCollapsed="true" %}}
+{{< code language="cpp" title="代码" isCollapsed="true" >}}
 #include <bits/stdc++.h>
 
 #define all(x) (x).begin(),(x).end()
@@ -763,13 +763,13 @@ int main() {
     }
     for (auto x : ans) cout<<x+1<<'\n';
 }
-{{% /code %}}
+{{< /code >}}
 
 ## CTSC2008 Network 网络管理
 
 我提交的地方是个私有题库，暂时没找到公开的提交的地方。其实基本上就是动态区间第k大，只不过区间变成了树上路径，用树剖分解成多个区间就行了。
 
-{{% code language="cpp" title="代码" isCollapsed="true" %}}
+{{< code language="cpp" title="代码" isCollapsed="true" >}}
 /* Author: Thallium54 {{{
  * Blog: https://blog.tgc-thallium.com/
  * Code library: https://github.com/thallium/acm-algorithm-template
@@ -920,4 +920,4 @@ int main() {
         else cout<<x<<'\n';
     }
 }
-{{% /code %}}
+{{< /code >}}
