@@ -2,7 +2,7 @@
 published: true
 date: 2020-03-13
 title: PB_DS的基础用法
-categories: [杂项]
+categories: [教程]
 tags: [数据结构]
 layout: post
 ---

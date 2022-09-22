@@ -1,7 +1,7 @@
 ---
 title: "使用自定义头文件在算法竞赛中辅助本地调试"
 date: 2021-05-21T20:22:27-04:00
-categories: [杂项]
+categories: [小技巧]
 tags: 
 ---
 
@@ -12,15 +12,31 @@ tags:
 ```cpp
 #ifdef LOCAL
 #include<pprint.hpp> // https://github.com/p-ranav/pprint
-pprint::PrettyPrinter P(cerr);
-#define de(...) P.compact(true);P.print(__VA_ARGS__)
-#define de_nc(...) P.compact(false);P.print(__VA_ARGS__)
+pprint::PrettyPrinter _printer(std::cerr);
+#define de(...) _printer.compact(true).print('[', #__VA_ARGS__,"] =", __VA_ARGS__)
+#define de2(...) _printer.compact(false).print('[', #__VA_ARGS__,"] =", __VA_ARGS__)
 #else
 #define de(...)
-#define de_nc(...)
+#define de2(...)
+#endif
+```
+注意这样做需要把`pprint.hpp`所在的目录加到`CPLUS_INCLUDE_PATH`环境变量里，或者编译时使用`-I`标记，或者将`pprint.hpp`放到系统include目录里。
+
+如果你嫌太长的话，可以将此部分
+```cpp
+#ifdef LOCAL
+#include<pprint.hpp> // https://github.com/p-ranav/pprint
+pprint::PrettyPrinter _printer(std::cerr);
+#define de(...) _printer.compact(true).print('[', #__VA_ARGS__,"] =", __VA_ARGS__)
+#define de2(...) _printer.compact(false).print('[', #__VA_ARGS__,"] =", __VA_ARGS__)
+#endif
+```
+放入`stdc++.h`里，只在代码中留下
+```cpp
+#ifndef LOCAL
+#define de(...)
+#define de2(...)
 #endif
 ```
 
-注意需要把头文件的目录加到`CPLUS_INCLUDE_PATH`环境变量里，或者使用`-I`标记。编译时加上`-DLOCAL`标记以定义`LOCAL`，可以换成其他的词，只要保证oj里没有这个标记就行。
-
-如果你使用预编译头文件的话，要把include的那一行放到`bits/stdc++.h`里，然后重新编译`bits/stdc++.h`。
+编译时加上`-DLOCAL`标记以定义`LOCAL`，可以换成其他的词，只要保证oj里没有定义这个就行。

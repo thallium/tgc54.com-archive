@@ -4,7 +4,7 @@ date: 2022-09-18T20:40:12-04:00
 summary: ""
 keywords: ["neovim", "treesitter", "development"]
 tags: ["Neovim", "dev"]
-categories: ["杂记"]
+categories: ["小技巧"]
 ---
 最近实习工作开始写C/C++了，由于项目结构过于复杂导致 VSCode 的 language server 几乎是不可用的状态，所以心想不如换回最顺手的 neovim，但从来没有用 neovim 做过大项目，所以要研究如何实现我在 VSCode 里常用的一些功能：
 <!--more-->
