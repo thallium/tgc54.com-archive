@@ -25,7 +25,7 @@ projects: []
 
 命令如下
 ```sh
-clang++ -I/your/path/to/library/ -E -P -nostdinc++ -nobuiltininc main.cpp > bundled.cpp
+clang++ -I/your/path/to/library/ -E -P -nostdinc++ -nobuiltininc main.cpp
 ```
 
 解释：
@@ -39,7 +39,8 @@ clang++ -I/your/path/to/library/ -E -P -nostdinc++ -nobuiltininc main.cpp > bund
 
 ```sh
 expand_cpp () {
-	clang++ -I/your/path/to/library/ -E -P -nostdinc++ -nobuiltininc $1 > bundled.cpp
-	gsed -i "1s/^/#include <bits\/stdc++.h>\n/" bundled.cpp
+    clang++ -I/your/path/to/library/ -E -P -nostdinc++ -nobuiltininc $1 | gsed "1s/^/#include <bits\/stdc++.h>\n/" | pbcopy
 }
 ```
+
+其中`pbcopy`是macOS上复制到剪切板的命令，其他平台用相应的命令代替即可。
