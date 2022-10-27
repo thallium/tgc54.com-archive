@@ -32,10 +32,10 @@ languages:
           name: "Tags"
           url: "/tags"
           weight: 3
-        - identifier: "Wiki"
-          name: "Wiki"
-          url: "https://wiki.tgc54.com"
-          weight: 4
+        # - identifier: "Wiki"
+        #   name: "Wiki"
+        #   url: "/wiki"
+        #   weight: 4
     params:
       logo:
         logoText: Thallium54
@@ -61,7 +61,7 @@ languages:
           weight: 3
         - identifier: "Wiki"
           name: "Wiki"
-          url: "https://wiki.tgc54.com"
+          url: "/zh/wiki"
           weight: 4
     params:
       logo:
