@@ -17,7 +17,7 @@ categories: ["算法笔记"]
 
 模板：
 ```cpp
-vector<int> sz(n), big(n, -1); // sz: 子树大小，big：重儿子
+vector<int> sz(n, 1), big(n, -1); // sz: 子树大小，big：重儿子
 auto cal_size = [&](auto& slf, int u, int p) -> void {
     for (auto v : g[u]) {
         if (v == p) continue;
@@ -31,7 +31,7 @@ auto cal_size = [&](auto& slf, int u, int p) -> void {
 cal_size(cal_size, 0, 0);
 
 auto add = [&](auto& slf, int u, int p) -> void {
-    // 在此将u添加进统计结果
+    // 在此将 u 添加进统计结果
     for (auto v : g[u]) {
         if (v == p) continue;
         slf(slf, v, u);
@@ -39,7 +39,7 @@ auto add = [&](auto& slf, int u, int p) -> void {
 };
 
 auto remove = [&](auto& slf, int u, int p) -> void {
-    // 在此将u从统计结果中移除
+    // 在此将 u 从统计结果中移除
     for (auto v : g[u]) {
         if (v == p) continue;
         slf(slf, v, u);
@@ -60,8 +60,8 @@ auto dfs = [&](auto& slf, int u, int p) -> void {
         if (v == p || v == big[u]) continue;
         add(add, v, u); // 再次添加轻儿子
     }
-    // 在此将u添加进统计结果
-    // 此处的统计结果即为u子树的答案
+    // 在此将 u 添加进统计结果
+    // 此处的统计结果即为 u 子树的答案
 };
 dfs(dfs, 0, 0);
 ```
