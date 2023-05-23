@@ -31,6 +31,7 @@
 ### 图论
 - [Tarjan算法（强连通，割点，桥）对比总结]({{< ref "posts/tarjans-algorithm/" >}})
 - [树上路径技巧]({{< ref "posts/tree-path-technique/" >}})
+- [树上启发式合并]({{< ref "posts/dsu-on-tree/" >}})
 
 ### 数学
 
