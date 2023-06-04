@@ -1,6 +1,6 @@
 languageCode: 'en-us'
 theme: 'hello-friend'
-paginate: 3
+paginate: 8
 hideReadMore: true
 hasCJKLanguage: true
 
@@ -24,14 +24,18 @@ languages:
           name: "Posts"
           url: "/posts"
           weight: 1
+        - identifier: "archive"
+          name: "Archive"
+          url: "/archive"
+          weight: 2
         - identifier: "categories"
           name: "Categories"
           url: "/categories"
-          weight: 2
+          weight: 3
         - identifier: "Tags"
           name: "Tags"
           url: "/tags"
-          weight: 3
+          weight: 4
         # - identifier: "Wiki"
         #   name: "Wiki"
         #   url: "/wiki"
@@ -42,30 +46,36 @@ languages:
         logoHomeLink: '/'
       langName: English
       allPosts: All Posts
+      recentPosts: Recent Posts
   zh:
     title: "Thallium54"
     contentDir: content/zh
     menu:
       main:
         - identifier: "posts"
-          name: "博文"
+          name: "文章"
           url: "/zh/posts"
           weight: 1
+        - identifier: "archive"
+          name: "归档"
+          url: "/zh/archive"
+          weight: 2
         - identifier: "Categories"
           name: "分类"
           url: "/zh/categories"
-          weight: 2
+          weight: 3
         - identifier: "tags"
           name: "标签"
           url: "/zh/tags"
-          weight: 3
+          weight: 4
         - identifier: "Wiki"
           name: "Wiki"
           url: "/zh/wiki"
-          weight: 4
+          weight: 5
     params:
       logo:
         logoText: Thallium54
         logoHomeLink: '/zh'
       langName: 简体中文
-      allPosts: 全部博文
+      allPosts: 全部文章
+      recentPosts: 最近文章
