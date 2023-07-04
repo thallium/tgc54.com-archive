@@ -5,374 +5,331 @@ categories: [算法笔记]
 tags: [整体二分,离线技巧,二分]
 ---
 
-整体二分在国外称为parallel binary search，是一种用于同时解决大量二分搜索的**离线算法**。 
+整体二分在国外称为 parallel binary search，是一种用于解决多个二分搜索的**离线算法**，其核心思想是将一个状态用于多个询问中。
 <!--more-->
 
-## 适用问题的描述
+## 适用的问题/核心思想
 
-整体二分适用于多次询问的问题，且一次询问代价很大（通常是因为无法预处理），如果对每个询问单独跑一次二分就会有大量的检查结果被浪费，整体二分旨在将一次检查的结果用于多个询问，或者说是将询问归类，一起处理归类在一起询问。
+一般的二分套路为：二分一个“指标”，对于当前要检查的指标，应用所有符合指标的操作，每个操作会产生一些贡献，最后判断贡献是否符合条件。如果我们要处理很多个二分问题而且应用操作的时间开销很大，每一个二分问题单独计算就会很慢。但经常应用完操作后的状态可以用于多个二分问题的条件检查，这就是整体二分的核心思想。
 
 ## 思路
 
-1. 假设当前有一些询问的答案在某个区间中，我们将区间一分为二
-2. 应用某一些修改，这些修改是可以帮助我们判断答案在在哪一半区间的修改
-3. 判断这些询问是否达到目标，将询问分为达到目标和没达到目标两个集合，同时可能会修改没达到目标的询问的目标（这一步要具体问题具体分析）
-4. 撤销步骤2中的修改
-5. 分别递归左右两个区间
+对于如何重复利用操作之后的状态，一般有两种思路：一种最常见的思路是根据当前二分的指标从小到大进行检查，这样可以在之前操作之后状态上继续应用新的操作然后再进行检查。
+
+如果因为一些因素使得无法应用第一种思路，但操作的贡献满足可加性的话，那么我们可以考虑第二种思路：记录下当前的状态的贡献，这样下一轮二分的时候我们可以在记录下的贡献上加上新的贡献。
+
+这样说可能有点抽象，下面我们结合一个例子来说明具体的实现是怎样的。
 
 ## 例题
-
-### 多次询问数组第k小
-
-正常的思路是对于每个询问二分一次。但我们也可以所有询问一起二分，根据左半部分的数的个数判断每个询问应该分到哪个集合中。
-
-核心代码如下(简洁起见没用离散化, `query[i]`是第i个询问的k值，`sum(l, r)`是在[l, r]区间中的数的个数)
-
-```cpp
-void solve(int l, int r, vector<int> id) {
-    if (l==r || id.empty()) {
-        for (auto i : id) ans[i]=l;
-        return;
-    }
-    vector<int> less, more;
-    int mid=(l+r)/2;
-    for (auto i : id) {
-        if (query[i]<=sum(l, mid)) less.push_back(i);
-        else {
-            query[i]-=sum(l, mid);
-            more.push_back(i);
-        }
-    }
-    solve(l, mid, less);
-    solve(mid+1, r, more);
-}
-```
 
 ### 静态数组区间第k小
 
 [题目链接](https://www.luogu.com.cn/problem/P3834)
 
-这题的一般做法是在可持久化线段树（主席树）上二分，并且可以在线回答询问。整体二分思路有相似也有不同，假设目前询问的区间是$[ql, qr]$,答案在$[l, r]$中，令$mid=(l+r)/2$，此时我们新建一个和原数组一样长的辅助数组，将整个数组中在$[l, mid]$中的数在辅助数组中各自的位置上+1，然后查询位置在$[ql, qr]$中的数的个数（也就是辅助数组中$[ql, qr]$的区间和），与k做比较并由此判断再往哪个区间继续二分。
+这个题二分的指标就是第 k 大的大小，即我们要检查：这个区间 $[l, r]$ 的第 k 大是否至少为 $x$，这可以通过判断 $[l, r]$ 内小于等于 $x$ 的元素的个数来实现。我们可以用一个权值数组 $b$ 记录所有所有小于等于 $x$ 的位置，即 $b_i = 1 \iff a_i \leq x$，那么符合指标的操作就是将权值数组中的某个位置加一。显然对于大的指标我们可以在小指标操作的基础上加入新的操作，所以我们可以应用第一种思路。
 
-这里要注意要是每次构建辅助数组的时候都扫过整个数组，时间会爆炸，所以我们可以像划分询问那样划分数组，这样添加的数都是在$[l, r]$中的数。
+对于第一种思路，一种比较简单的写法是用两个数组 $l, r$ 记录当前每个询问的答案所处的范围，在每一轮二分中根据 $x = \frac {(l + r)}{2}$ 从小到大遍历每个询问
 
-**关于划分的写法：**
-
-常见的写法是用两个数组存左边和右边的询问，但其实可以直接利用`std::partition`或者`std::stable_partition`直接在原数组上划分，内存和时间上都更优（时间少10%左右，内存少30%左右），而且个人感觉写起来更简洁一些？后面所有题都有partition的写法，部分有数组的写法，选择自己喜欢的即可。
-
-{{< code language="cpp" title="代码" isCollapsed="true" >}}
+{{< code language="cpp" title="代码（思路一）" isCollapsed="true" >}}
+// 树状数组代码省略已省略，见 https://github.com/thallium/acm-algorithm-template/blob/master/src/data_structure/fenwick.hpp
 #include <bits/stdc++.h>
 
 using namespace std;
 
-#define all(x) (x).begin(),(x).end()
-
-constexpr int M=3e5;
-namespace fenwick {
-  int n;
-  int t[M];
-
-    using T=int;
-  void update(int i, T x) {
-    while (i < n) {
-      t[i] += x;
-      i |= (i + 1);
-    }
-  }
-
-
-  template <typename U> U query(int i) {
-    U res{};
-    for (; i >= 0; i = (i & (i + 1)) - 1)
-      res += t[i];
-    return res;
-  }
-
-  template <typename U>
-  U query(int l, int r) { return query<U>(r) - (l ? query<U>(l - 1) : U{}); }
-};
-struct Num{
-    int x, i;
-};
-
-struct Query {
-    int l, r, k, id;
-};
 int main() {
-    cin.tie(nullptr)->sync_with_stdio(false);
-    int n, q;
-    cin>>n>>q;
-    vector<Num> a(n);
-    vector<int> comp(n), aa(n);
-    for (int i=0; i<n; i++) {
-        cin>>aa[i];
-        comp[i]=aa[i];
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int n, m;
+    cin >> n >> m;
+
+    vector<int> a(n);
+    for (auto &x : a)
+        cin >> x;
+
+    vector<int> compress{a};
+    sort(begin(compress), end(compress));
+    compress.erase(unique(begin(compress), end(compress)), end(compress));
+    const int N = (int)size(compress);
+
+    vector<vector<int>> pos(N);
+    for (int i = 0; i < n; i++) {
+        int idx = int(lower_bound(begin(compress), end(compress), a[i]) - begin(compress));
+        pos[idx].push_back(i);
     }
-    sort(all(comp));
-    comp.erase(unique(all(comp)), comp.end()); 
-    for (int i=0; i<n; i++) a[i]={static_cast<int>(lower_bound(all(comp), aa[i])-comp.begin()), i}; // 离散化
-    vector<Query> Q(q);
-    for (int i=0; i<q; i++) {
-        auto& [l, r, k, id]=Q[i];
-        cin>>l>>r>>k;
-        id=i;
-        l--, r--;
+
+    vector<array<int, 3>> query(m);
+    for (auto &[l, r, k] : query) {
+        cin >> l >> r >> k;
+        l--;
     }
-    fenwick::n=n;
-    vector<int> ans(q);
-    // abegin 和 aend 是原数组中值在[l, r]中的数的区间， qbegin 和 qend是答案在[l, r]中的询问的区间
-    auto solve=[&](auto& solve, int l, int r, auto abegin, auto aend, auto qbegin, auto qend) {
-        if (l==r || qbegin==qend) {
-            for (auto it=qbegin; it!=qend; ++it) ans[it->id]=l;
-            return;
+
+    vector<int> l(m, 0), r(m, N - 1);
+    while (true) {
+        vector<vector<int>> s(N);
+        int empty = 1;
+        for (int i = 0; i < m; i++) {
+            if (l[i] <= r[i]) {
+                int mid = (l[i] + r[i]) / 2;
+                s[mid].push_back(i);
+                empty = 0;
+            }
         }
-        int mid=(l+r)/2;
-        auto amid=partition(abegin, aend, [&](Num& x){ // 划分原数组，并更新树状数组
-            if (x.x<=mid) {
-                fenwick::update(x.i, 1);
-                return true;
+
+        if (empty) {
+            break;
+        }
+
+        Fenwick<int> tr(n);
+        for (int i = 0; i < N; i++) {
+            for (auto j : pos[i]) {
+                tr.add(j, 1);
             }
-            return false;
-        });
-        auto qmid=partition(qbegin, qend, [&](Query& q) { // 划分询问
-            int t=fenwick::query<int>(q.l, q.r);
-            if (q.k<=t) return true;
-            else {
-                q.k-=t;
-                return false;
+
+            for (auto j : s[i]) {
+                auto [ql, qr, k] = query[j];
+                if (tr.get(ql, qr) >= k) {
+                    r[j] = i - 1;
+                } else {
+                    l[j] = i + 1;
+                }
             }
-        });
-        for (auto it=abegin; it!=amid; ++it) fenwick::update(it->i, -1); // 撤销之前的操作以清空树状数组
-        solve(solve, l, mid, abegin, amid, qbegin, qmid);
-        solve(solve, mid+1, r, amid, aend, qmid, qend);
-    };
-    solve(solve, 0, (int)comp.size(), a.begin(), a.end(), Q.begin(), Q.end());
-    for (auto x : ans) cout<<comp[x]<<'\n';
+        }
+    }
+
+    for (auto i : l) {
+        cout << compress[i] << '\n';
+    }
+    return 0;
 }
 {{< /code >}}
+
+
+我们再次也将介绍第二种思路的写法，这样有助于理解下面动态区间第 k 小的做法。假设一个询问的答案在 $[l, r]$ 中，指标为 $x$，询问的区间中有 $n$ 个小于等于 $x$ 的数，$n$ 即为当前所有操作的总贡献，如果 $n < k$，说明答案在 $[x + 1, r]$ 中。如果我们记录下当前的贡献，下次二分的指标为 $y = \frac {x + 1 + r} 2$，我们只要知道询问的区间里大小在 $[x + 1, y]$ 中的元素的个数，再加上之前记录的贡献，这样就相当于知道了小于等于 $y$ 的元素的个数。所以说在下一轮二分的时候我们只需要影响 $[x + 1, y]$ 中的元素个数的操作，$n \ge k$ 的情况类似。所以我们每次二分之后要将操作分成左右两组给下一轮二分用。
+
+{{< code language="cpp" title="代码（思路二）" isCollapsed="true" >}}
+#include <bits/stdc++.h>
+#include "data_structure/fenwick.hpp"
+using namespace std;
+
+struct modify {
+    int val, pos;
+};
+
+struct query {
+    int l, r, k, i;
+};
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int n, m;
+    cin >> n >> m;
+
+    vector<int> a(n);
+    for (auto &x : a)
+        cin >> x;
+
+    // 离散化
+    vector<int> compress{a};
+    sort(begin(compress), end(compress));
+    compress.erase(unique(begin(compress), end(compress)), end(compress));
+    const int N = (int)size(compress);
+
+    using op = variant<modify, query>;
+    vector<op> ops; // 为了方便实现我们把询问和修改放到一起
+
+    for (int i = 0; i < n; i++) {
+        int val = int(lower_bound(begin(compress), end(compress), a[i]) - begin(compress));
+        ops.push_back(modify{val, i});
+    }
+
+    for (int i = 0; i < m; i++) {
+        int l, r, k;
+        cin >> l >> r >> k;
+        l--;
+        ops.push_back(query{l, r, k, i});
+    }
+
+    vector<int> ans(m);
+
+    Fenwick<int> tr(n);
+    auto solve = [&](auto& slf, int l, int r, vector<op>& ops) -> void {
+        if (l == r) { // 二分结束，答案确定
+            for (const auto& o : ops) {
+                if (holds_alternative<query>(o)) { // 如果是询问的话
+                    ans[get<query>(o).i] = compress[l];
+                }
+            }
+            return;
+        }
+
+        int x = (l + r) / 2;
+
+        vector<op> left, right;
+        for (auto o : ops) {
+            if (holds_alternative<query>(o)) { // 询问
+                auto& [ql, qr, k, i] = get<query>(o);
+                int c = tr.get(ql, qr); // 贡献
+                if (c >= k) { // 根据贡献判断询问的答案该如何改变
+                    left.push_back(o);
+                } else {
+                    k -= c; // 在目标上减掉贡献和记录贡献是一样的
+                    right.push_back(o);
+                }
+            } else { // 修改
+                auto [val, pos] = get<modify>(o);
+                if (val <= x) {
+                    tr.add(pos, 1);
+                    left.push_back(o);
+                } else {
+                    right.push_back(o);
+                }
+            }
+        }
+
+        for (auto o : left) {
+            if (holds_alternative<modify>(o)) { // 还原树状数组到初始状态
+                tr.add(get<modify>(o).pos, -1);
+            }
+        }
+
+        vector<op>{}.swap(ops); // 释放空间
+
+        slf(slf, l, x, left);
+        slf(slf, x + 1, r, right);
+    };
+
+    solve(solve, 0, N - 1, ops);
+
+    for (auto x : ans) cout << x << '\n';
+    return 0;
+}
+{{< /code >}}
+
+可以看出第一种思路的实现往往比较好写，其实大部分整体二分的题目都是用第一种思路解决的。
 
 ### 动态区间第k小
 
 [题目链接](https://www.luogu.com.cn/problem/P2617)
 
-修改无非就是把原来的数删掉（在辅助数组中减1），再加上修改之后的数，和上一题大同小异。区别是由于有了时间顺序，不能像上一题先修改再询问了，要把修改和询问放在一个数组（其实上一题也能放在一个数组里，只是为了方便理解分成了两个数组），而且要用`std::stable_partition`以保证相对时间顺序不变。
+因为询问和修改有先后顺序，所以不能用第一种思路。其实如果你理解了上一题的第二种思路的话，修改无非就是把原来的数删掉（在辅助数组中减1），再加上修改之后的数。
 
-{{< code language="cpp" title="代码1（partition）" isCollapsed="true" >}}
-#include <algorithm>
+{{< code language="cpp" title="代码" isCollapsed="true" >}}
 #include <bits/stdc++.h>
+#include "data_structure/fenwick.hpp"
 
 using namespace std;
 
-#define all(x) (x).begin(), (x).end()
+struct modify {
+    int val, pos, add;
+};
 
-constexpr int M = 3e5;
-int N;
-int t[M];
-
-using T = int;
-void update(int i, T x) {
-    while (i < N) {
-        t[i] += x;
-        i |= (i + 1);
-    }
-}
-
-template <typename U> U query(int i) {
-    U res{};
-    for (; i >= 0; i = (i & (i + 1)) - 1)
-        res += t[i];
-    return res;
-}
-
-template <typename U> U query(int l, int r) {
-    return query<U>(r) - (l ? query<U>(l - 1) : U{});
-}
-
-struct op {
-    int type;
-    // if type==0, add j to position i, a[i]=k
-    // if type==1, query k-th smallest element in [i, j], id is the index of the query
-    int i, j, k, id;
+struct query {
+    int l, r, k, i;
 };
 int main() {
-    cin.tie(nullptr)->sync_with_stdio(false);
-    int n, q;
-    cin >> n >> q;
-    vector<op> ops;
-    vector<int> comp, a(n);
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int n, m;
+    cin >> n >> m;
+
+    using op = variant<modify, query>;
+    vector<op> ops; // 为了方便实现我们把询问和修改放到一起
+
+    vector<int> a(n);
     for (int i = 0; i < n; i++) {
         cin >> a[i];
-        comp.push_back(a[i]);
-        ops.push_back({0, i, 1, a[i], -1});
+        ops.push_back(modify{a[i], i, 1});
     }
-    int qcnt = 0;
-    for (int i = 0; i < q; i++) {
-        char ch;
-        cin >> ch;
-        if (ch == 'Q') {
-            int l, r, k;
-            cin >> l >> r >> k;
-            ops.push_back({1, l - 1, r - 1, k, qcnt++});
-        } else {
-            int x, y;
-            cin >> x >> y;
-            x--;
-            ops.push_back({0, x, -1, a[x], -1});
-            comp.push_back(y);
-            a[x] = y;
-            ops.push_back({0, x, 1, y, -1});
-        }
-    }
+
     // 离散化
-    sort(all(comp));
-    comp.erase(unique(all(comp)), comp.end());
-    for (auto &[type, i, j, k, id] : ops) {
-        if (type == 0) k = lower_bound(all(comp), k) - comp.begin();
-    }
-    N = n;
-    vector<int> ans(qcnt);
-    auto solve = [&](auto &solve, int l, int r, auto begin, auto end) {
-        if (l == r || begin == end) {
-            for (auto it = begin; it != end; ++it)
-                if (it->type == 1) ans[it->id] = l;
-            return;
-        }
-        int mid = (l + r) / 2;
-        // 因为要保证相对顺序不变所以要用stable_partition
-        auto qmid = stable_partition(begin, end, [&](op &q) {
-            auto &[type, i, j, k, id] = q;
-            if (type == 1) {
-                int cnt = query<int>(i, j);
-                if (cnt >= k) return true;
-                else {
-                    k -= cnt;
-                    return false;
-                }
-            } else {
-                if (k <= mid) {
-                    update(i, j);
-                    return true;
-                } else
-                    return false;
-            }
-        });
-        for (auto it = begin; it != qmid; ++it)
-            if (it->type == 0) update(it->i, -it->j);
-        solve(solve, l, mid, begin, qmid);
-        solve(solve, mid + 1, r, qmid, end);
-    };
-    solve(solve, 0, (int)comp.size(), ops.begin(), ops.end());
-    for (auto x : ans)
-        cout << comp[x] << '\n';
-}
-{{< /code >}}
+    vector<int> comp{a};
 
-{{< code language="cpp" title="代码2（数组）" isCollapsed="true" >}}
-#include <bits/stdc++.h>
-
-using namespace std;
-#define all(x) (x).begin(), (x).end()
-
-constexpr int M = 3e5;
-int N;
-int t[M];
-
-using T = int;
-void update(int i, T x) {
-    while (i < N) {
-        t[i] += x;
-        i |= (i + 1);
-    }
-}
-
-template <typename U> U query(int i) {
-    U res{};
-    for (; i >= 0; i = (i & (i + 1)) - 1)
-        res += t[i];
-    return res;
-}
-
-template <typename U> U query(int l, int r) {
-    return query<U>(r) - (l ? query<U>(l - 1) : U{});
-}
-
-struct op {
-    int type;
-    // if type==0, add j to position i, a[i]=k
-    // if type==1, query k-th smallest element in [i, j], id is the index
-    int i, j, k, id;
-};
-int main() {
-    cin.tie(nullptr)->sync_with_stdio(false);
-    int n, q;
-    cin >> n >> q;
-    vector<op> ops;
-    vector<int> comp, a(n);
-    for (int i = 0; i < n; i++) {
-        cin >> a[i];
-        comp.push_back(a[i]);
-        ops.push_back({0, i, 1, a[i], -1});
-    }
     int qcnt = 0;
-    for (int i = 0; i < q; i++) {
+    for (int i = 0; i < m; i++) {
         char ch;
         cin >> ch;
         if (ch == 'Q') {
             int l, r, k;
             cin >> l >> r >> k;
-            ops.push_back({1, l - 1, r - 1, k, qcnt++});
+            l--;
+            ops.push_back(query{l, r, k, qcnt});
+            qcnt++;
         } else {
             int x, y;
             cin >> x >> y;
             x--;
-            ops.push_back({0, x, -1, a[x], -1});
+            ops.push_back(modify{a[x], x, -1});
             comp.push_back(y);
             a[x] = y;
-            ops.push_back({0, x, 1, y, -1});
+            ops.push_back(modify{a[x], x, 1});
         }
     }
-    sort(all(comp));
-    comp.erase(unique(all(comp)), comp.end());
-    for (auto &[type, i, j, k, id] : ops) {
-        if (type == 0) k = lower_bound(all(comp), k) - comp.begin();
+
+    sort(begin(comp), end(comp));
+    comp.erase(unique(begin(comp), end(comp)), end(comp));
+    const int N = (int)size(comp);
+
+    for (auto& o : ops) {
+        if (holds_alternative<modify>(o)) {
+            auto& v = get<modify>(o).val;
+            v = int(lower_bound(begin(comp), end(comp), v) -  begin(comp));
+        }
     }
-    N = n;
+
     vector<int> ans(qcnt);
-    auto solve = [&](auto &solve, int l, int r, vector<op> &ops) {
-        if (l == r || ops.empty()) {
-            for (auto &q : ops) {
-                if (q.type == 1) ans[q.id] = l;
+
+    Fenwick<int> tr(n);
+    auto solve = [&](auto& slf, int l, int r, vector<op>& ops) -> void {
+        if (l == r) { // 二分结束，答案确定
+            for (const auto& o : ops) {
+                if (holds_alternative<query>(o)) { // 如果是询问的话
+                    ans[get<query>(o).i] = comp[l];
+                }
             }
             return;
         }
-        int mid = (l + r) / 2;
+
+        int x = (l + r) / 2;
+
         vector<op> left, right;
-        for (auto &q : ops) {
-            auto &[type, i, j, k, id] = q;
-            if (type == 1) {
-                int cnt = query<int>(i, j);
-                if (cnt >= k) left.push_back(q);
-                else {
-                    k -= cnt;
-                    right.push_back(q);
+        for (auto o : ops) {
+            if (holds_alternative<query>(o)) { // 询问
+                auto& [ql, qr, k, i] = get<query>(o);
+                int c = tr.get(ql, qr); // 贡献
+                if (c >= k) { // 根据贡献判断询问的答案该如何改变
+                    left.push_back(o);
+                } else {
+                    k -= c; // 在目标上减掉贡献和记录贡献是一样的
+                    right.push_back(o);
                 }
-            } else {
-                if (k <= mid) {
-                    update(i, j);
-                    left.push_back(q);
-                } else
-                    right.push_back(q);
+            } else { // 修改
+                auto [val, pos, add] = get<modify>(o);
+                if (val <= x) {
+                    tr.add(pos, add);
+                    left.push_back(o);
+                } else {
+                    right.push_back(o);
+                }
             }
         }
-        for (auto &q : left)
-            if (q.type == 0) update(q.i, -q.j);
-        vector<op>().swap(ops);
-        solve(solve, l, mid, left);
-        solve(solve, mid + 1, r, right);
+
+        for (auto o : left) {
+            if (holds_alternative<modify>(o)) { // 还原树状数组到初始状态
+                auto [val, pos, add] = get<modify>(o);
+                tr.add(pos, -add);
+            }
+        }
+
+        vector<op>{}.swap(ops); // 释放空间
+
+        slf(slf, l, x, left);
+        slf(slf, x + 1, r, right);
     };
-    solve(solve, 0, (int)comp.size(), ops);
-    for (auto x : ans)
-        cout << comp[x] << '\n';
+
+    solve(solve, 0, N - 1, ops);
+
+    for (auto x : ans) cout << x << '\n';
+    return 0;
 }
 {{< /code >}}
 
@@ -380,101 +337,98 @@ int main() {
 
 [题目链接](https://www.luogu.com.cn/problem/P3332)
 
-$[l, r]$中每个集合加入一个数就相当于在辅助数组中$[l, r]$的位置上加1,所以我们需要一个可以区间加的数据结构，最简单的就是树状数组啦。其他和上一题没区别。
+此题同样因为有先后顺序所以也不能用第一种思路，但思路和上题类似。 $[l, r]$ 中每个集合加入一个数就相当于在辅助数组中 $[l, r]$ 的位置上加1，所以我们需要一个可以区间加的数据结构，最简单的就是树状数组啦。实现细节详见代码。
 
 {{< code language="cpp" title="代码" isCollapsed="true" >}}
 #include <bits/stdc++.h>
-
+#include "data_structure/fenwick_range_update.hpp"
 using namespace std;
-#define all(x) (x).begin(), (x).end()
 
-template <typename T> struct fenwick_rg {
-    int n;
-    vector<T> sum1, sum2;
-    fenwick_rg(int n_) : n(n_), sum1(n+1), sum2(n+1) {}
-
-    void update(int p, T x) {
-        p++;
-        for (int i = p; i <= n; i += i & -i)
-            sum1[i] += x, sum2[i] += x * p;
-    }
-    void update(int l, int r, T x) { update(l, x), update(r + 1, -x); }
-
-    T query(int p) {
-        p++;
-        T res{};
-        for (int i = p; i; i -= i & -i)
-            res += (p + 1) * sum1[i] - sum2[i];
-        return res;
-    }
-
-    T query(int l, int r) { return query(r) - query(l - 1); }
+struct modify {
+    int val, l, r;
 };
 
-struct op {
-    int type;
-    // if type==0, add k to [l, r]
-    // if type==1, query k-th smallest element in [l, r], id is the index
+struct query {
     int l, r;
-    long long k;
-    int id;
-    op(int t, int _l, int _r, long long _k, int _id)
-        : type(t), l(_l), r(_r), k(_k), id(_id) {}
+    int64_t k;
+    int i;
 };
 int main() {
-    cin.tie(nullptr)->sync_with_stdio(false);
-    int n, q;
-    cin >> n >> q;
-    vector<op> ops;
-    vector<int> comp;
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int n, m;
+    cin >> n >> m;
+
+    using op = variant<modify, query>;
+    vector<op> ops; // 为了方便实现我们把询问和修改放到一起
+
     int qcnt = 0;
-    for (int i = 0; i < q; i++) {
-        int op;
-        int l, r, k;
-        cin >> op>>l>>r>>k;;
-        if (op == 2) {
-            ops.push_back({1, l - 1, r - 1, k, qcnt++});
+
+    for (int i = 0; i < m; i++) {
+        int op, l, r, c;
+        cin >> op >> l >> r >> c;
+        l--;
+        if (op == 1) {
+            ops.push_back(modify{c, l, r});
         } else {
-            ops.push_back({0, l-1, r-1, k, -1});
-            comp.push_back(k);
+            ops.push_back(query{l, r, c, qcnt++});
         }
     }
-    sort(all(comp));
-    comp.erase(unique(all(comp)), comp.end());
-    for (auto &[type, i, j, k, id] : ops) {
-        if (type == 0) k = lower_bound(all(comp), k) - comp.begin();
-    }
-    fenwick_rg<long long> tr(n);
+
     vector<int> ans(qcnt);
-    auto solve = [&](auto &solve, int l, int r, auto ql, auto qr) {
-        if (l == r || ql == qr) {
-            for (auto it = ql; it != qr; ++it)
-                if (it->type == 1) ans[it->id] = l;
+
+    fenwick_rg tr(n);
+    auto solve = [&](auto& slf, int l, int r, vector<op>& ops) -> void {
+        if (l == r || ops.empty()) { // 二分结束，答案确定
+            for (const auto& o : ops) {
+                if (holds_alternative<query>(o)) { // 如果是询问的话
+                    ans[get<query>(o).i] = l;
+                }
+            }
             return;
         }
-        int mid = (l + r) / 2;
-        auto qmid = stable_partition(ql, qr, [&](op &q) {
-            auto &[type, l, r, k, id] = q;
-            if (type == 1) {
-                long long cnt = tr.query(l, r);
-                if (cnt >= k) return false;
-                k -= cnt;
-                return true;
-            } else {
-                if (k > mid) {
-                    tr.update(l, r, 1);
-                    return false;
-                } else return true;
+
+        int x = (l + r) / 2;
+
+        vector<op> left, right;
+        for (auto o : ops) {
+            if (holds_alternative<query>(o)) { // 询问
+                auto& [ql, qr, k, i] = get<query>(o);
+                int64_t c = tr.get(ql, qr); // 贡献
+                if (c >= k) { // 根据贡献判断询问的答案该如何改变
+                    right.push_back(o);
+                } else {
+                    k -= c; // 在目标上减掉贡献和记录贡献是一样的
+                    left.push_back(o);
+                }
+            } else { // 修改
+                auto [val, ql, qr] = get<modify>(o);
+                if (val > x) {
+                    tr.add(ql, qr, 1);
+                    right.push_back(o);
+                } else {
+                    left.push_back(o);
+                }
             }
-        });
-        for (auto it = qmid; it != qr; ++it)
-            if (it->type == 0) tr.update(it->l, it->r, -1);
-        solve(solve, l, mid, ql, qmid);
-        solve(solve, mid + 1, r, qmid, qr);
+        }
+
+        for (auto o : right) {
+            if (holds_alternative<modify>(o)) { // 还原树状数组到初始状态
+                auto [val, ql, qr] = get<modify>(o);
+                tr.add(ql, qr, -1);
+            }
+        }
+
+        vector<op>{}.swap(ops); // 释放空间
+
+        slf(slf, l, x, left);
+        slf(slf, x + 1, r, right);
     };
-    solve(solve, 0, (int)comp.size(), ops.begin(), ops.end());
-    for (auto x : ans)
-        cout << comp[x] << '\n';
+
+    solve(solve, 0, n, ops);
+
+    for (auto x : ans) cout << x << '\n';
+    return 0;
 }
 {{< /code >}}
 
@@ -482,184 +436,92 @@ int main() {
 
 [题目链接](https://loj.ac/p/2169)
 
-思路:
-- 假设当前有一些询问的答案在某个修改区间中，我们将修改区间从中间分开
-- 应用左半部分的修改
-- 判断这些询问是否达到目标，将询问分为达到目标和没达到目标两个集合，同时将左半部分修改的贡献从没达到目标的询问中减去
-- 撤销左半部分的修改
-- 递归两个修改区间
+此题的修改操作为区间加，而且修改和询问没有前后顺序，所以可以用第一种思路。
 
-
-{{< code language="cpp" title="核心函数(数组)" isCollapsed="true" >}}
-// 修改的范围是[low, high], 答案在[low, high]中的询问存在members里
-auto solve = [&](auto & solve, int low, int high, vector<int> &members) {
-    if (members.empty() && low == high) { // 区间长度为1,或者没有符合条件的询问
-        for (auto x : members) // 记录答案
-            ans[x] = low;
-        return;
-    }
-
-    int mid = (low + high) / 2;
-    for (int i = low; i <= mid; i++) {
-        apply_modification(i, 1); // 应用左半部分的修改
-    }
-    vector<int> left, right;
-    for (const auto &m : members) {
-        ll has = 0;
-        for (const auto &sec : own[m]) {
-            has += fenwick::query<ll>(sec);
-            if (has >= need[m]) break;
-        }
-        if (has >= need[m]) { // 询问的条件被满足，说明该询问 的答案在左半区间
-            left.push_back(m);
-        } else { // 反之，答案在右半区间
-            need[m] -= has; // 减去左半部分修改的贡献
-            right.push_back(m); 
-        }
-    }
-    for (int i = low; i <= mid; i++) {
-        apply_modification(i, -1); // 撤销修改
-    }
-    solve(solve, low, mid, left);
-    vector<int>().swap(left); // 清空数组，优化内存使用
-    solve(solve, mid + 1, high, right);
-    vector<int>().swap(right);
-};
-{{< /code >}}
-<br/>
-
-{{< code language="cpp" title="核心函数(partition)" isCollapsed="true" >}}
-// 修改的范围是[low, high], 符合条件的询问的区间是[begin, end)，begin和end是迭代器，方便传给partition.
-auto solve=[&](auto& solve, int low, int high, auto begin, auto end) {
-    if (begin==end || low==high) {
-        for (auto i=begin; i!=end; i++) ans[*i]=low; // 记录答案
-        return;
-    }
-    int mid=(low+high)/2;
-    for (int i=low; i<=mid; i++) {
-        apply_modification(i, 1);
-    }
-    auto m=partition(begin, end, [&](int m) { // 利用partition函数直接原地划分集合，避免新开数组，优化内存
-        ll has=0;
-        for (const auto& sec : own[m]) {
-            has+=fenwick::query<ll>(sec);
-            if (has>=need[m]) break;
-        }
-        if (has>=need[m]) {
-            return true;
-        } else {
-            need[m]-=has;
-            return false;
-        }
-    });
-    for (int i=low; i<=mid; i++) {
-        apply_modification(i, -1);
-    }
-    solve(solve, low, mid, begin, m);
-    solve(solve, mid+1, high, m, end);
-};
-{{< /code >}}
-
-<br/>
-
-{{< code language="cpp" title="完整代码" isCollapsed="true" >}}
+{{< code language="cpp" title="代码" isCollapsed="true" >}}
 #include <bits/stdc++.h>
-
+#include "data_structure/fenwick.hpp"
 using namespace std;
-#define all(x) (x).begin(),(x).end()
-using ll = long long;
-using pii = pair<int, int>;
 
-constexpr int M=3e5;
-namespace fenwick { // 此题时间很严，需要用静态数组实现的树状数组
-  int n;
-  ll t[M];
-
-    using T=ll;
-  void update(int i, T x) {
-    while (i < n) {
-      t[i] += x;
-      i |= (i + 1);
-    }
-  }
-
-  void update(int l, int r, T x) {
-      update(l, x);
-      if (r+1<n) update(r+1, -x);
-  }
-
-  template <typename U> U query(int i) {
-    U res{};
-    for (; i >= 0; i = (i & (i + 1)) - 1)
-      res += t[i];
-    return res;
-  }
-
-};
 int main() {
-    cin.tie(nullptr)->sync_with_stdio(false);
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
     int n, m;
-    cin>>n>>m;
-    vector<vector<int>> own(n);
-    for (int i=0; i<m; i++) {
+    cin >> n >> m;
+
+    vector<vector<int>> pos(n);
+    for (int i = 0; i < m; i++) {
         int x;
-        cin>>x;
-        own[x-1].push_back(i);
+        cin >> x;
+        pos[x - 1].push_back(i);
     }
-    vector<ll> need(n);
-    for (auto& x : need) cin>>x;
-    int q;
-    cin>>q;
-    vector<int> l(q), r(q), val(q);
-    for (int i=0; i<q; i++) {
-        cin>>l[i]>>r[i]>>val[i];
-        l[i]--, r[i]--;
+
+    vector<int> target(n);
+    for (auto& x : target) {
+        cin >> x;
     }
-    fenwick::n=m;
-    vector<int> members(n);
-    iota(all(members), 0);
-    auto apply_modification=[&](int q, int flag) {
-        int v=val[q]*flag;
-        if (l[q]<=r[q]) fenwick::update(l[q], r[q], v);
-        else {
-            fenwick::update(l[q], m-1, v);
-            fenwick::update(0, r[q], v);
-        }
-    };
-    vector<int> ans(n, -1);
-    auto solve=[&](auto& solve, int low, int high, auto begin, auto end) {
-        if (begin==end || low==high) {
-            for (auto i=begin; i!=end; i++) ans[*i]=low;
-            return;
-        }
-        int mid=(low+high)/2;
-        for (int i=low; i<=mid; i++) {
-            apply_modification(i, 1);
-        }
-        auto m=partition(begin, end, [&](int m) {
-            ll has=0;
-            for (const auto& sec : own[m]) {
-                has+=fenwick::query<ll>(sec);
-                if (has>=need[m]) break;
+
+    int k;
+    cin >> k;
+    vector<array<int, 3>> meteors(k);
+    for (auto& [l, r, x] : meteors) {
+        cin >> l >> r >> x;
+        l--, r--;
+    }
+
+    vector<int> l(n, 0), r(n, k - 1);
+
+
+    while (true) {
+        vector<vector<int>> to_check(k);
+        bool done = 1;
+        for (int i = 0; i < n; i++) {
+            if (l[i] <= r[i]) {
+                int mid = (l[i] + r[i]) / 2;
+                to_check[mid].push_back(i);
+                done = false;
             }
-            if (has>=need[m]) {
-                return true;
+        }
+
+        if (done) {
+            break;
+        }
+
+        Fenwick<int64_t> tr(m + 1);
+        auto range_add = [&](int l, int r, int x) {
+            tr.add(l, x);
+            tr.add(r, -x);
+        };
+        auto apply_meteor = [&](int i) {
+            auto [l, r, x] = meteors[i];
+            if (l <= r) {
+                range_add(l, r + 1, x);
             } else {
-                need[m]-=has;
-                return false;
+                range_add(l, m, x);
+                range_add(0, r + 1, x);
             }
-        });
-        for (int i=low; i<=mid; i++) {
-            apply_modification(i, -1);
+        };
+        for (int i = 0; i < k; i++) {
+            apply_meteor(i);
+            for (auto j : to_check[i]) {
+                uint64_t sum = 0;
+                for (auto p : pos[j]) {
+                    sum += tr.get(p + 1);
+                }
+                if (sum >= target[j]) {
+                    r[j] = i - 1;
+                } else {
+                    l[j] = i + 1;
+                }
+            }
         }
-        solve(solve, low, mid, begin, m);
-        solve(solve, mid+1, high, m, end);
-    };
-    solve(solve, 0, q, members.begin(), members.end());
-    for (auto x :  ans) {
-        if (x!=q) cout<<x+1<<'\n';
-        else cout<<"NIE\n";
     }
+
+    for (auto x : l) {
+        if (x == k) cout << "NIE\n";
+        else cout << x + 1 << '\n';
+    }
+    return 0;
 }
 {{< /code >}}
 
@@ -668,256 +530,72 @@ int main() {
 
 [题目链接](https://atcoder.jp/contests/agc002/tasks/agc002_d)
 
-这题思路其实不难，假设当前答案在$[l, r]$内，令$mid=(l+r)/2$，将编号从0到mid的边放入并查集中然后判断连通块大小即可，但问题是这题的目标修改不了，没法像前面的题一样减掉前面的贡献，而每次加边如果都从0到mid的话时间会爆炸，所以要尽可能利用并查集之前的信息，所以我们将递归改成用队列实现，这样区间的顺序就变成了从小到大，就可以很好的利用之前的信息，只有区间到头了的时候才会清空并查集。如果把区间想象成一棵线段树的话，前面的递归可以看成dfs,队列就是bfs,由于树高是$\log(n)$的，所以时间是$O(n\log(n))$的。
+这题思路其实不难，修改就是在并查集里连边，贡献就是连通块的大小，用第一种思路解决。
 
 {{< code language="cpp" title="代码" isCollapsed="true" >}}
 #include <bits/stdc++.h>
-
-#define all(x) (x).begin(),(x).end()
+#include "data_structure/union_find.hpp"
 using namespace std;
-using ll = long long;
-using pii = pair<int, int>;
-
-struct Q {
-    int x, y, z, id;
-};
-struct UF {
-    int n;
-    vector<int> pa; // parent or size, positive number means parent, negative number means size
-    explicit UF(int _n) : n(_n), pa(n, -1) {}
-
-    int find(int x) {
-        assert(0 <= x && x < n);
-        return pa[x] < 0 ? x : pa[x]=find(pa[x]);
-    }
-
-    bool same(int x, int y) {
-        return find(x)==find(y);
-    }
-
-    bool join(int x, int y) {
-        assert(0 <= x && x < n);
-        assert(0 <= y && y < n);
-        x=find(x), y=find(y);
-        if (x==y) return false;
-        if (-pa[x] < -pa[y]) swap(x, y); // size of x is smaller than size of y
-        pa[x]+=pa[y];
-        pa[y]=x;
-        return true;
-    }
-
-    int size(int x) {
-        assert(0 <= x && x < n);
-        return -pa[find(x)];
-    }
-};
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     int n, m;
-    cin>>n>>m;
-    vector<pair<int, int>> edges(m);
-    for (auto& [x, y] : edges) {
-        cin>>x>>y;
-        x--, y--;
-    }
-    int q;
-    cin>>q;
-    vector<int> ans(q);
-    vector<Q> queries(q);
-    for (int i=0; i<q; i++) {
-        auto& [x, y, z, id] = queries[i];
-        cin>>x>>y>>z;
-        x--, y--;
-        id=i;
-    }
-    UF uf(n);
-    queue<tuple<int, int, int, int>> que;
-    que.emplace(0, m-1, 0, q);
-    int cur=0; // cur用来记录当前哪些边被加进了并查集里
-    while (!que.empty()) {
-        auto [l, r, ql, qr]=que.front();
-        que.pop();
-        if (l==r || ql==qr) {
-            for (auto it=ql; it!=qr; ++it) {
-                ans[queries[it].id]=l;
-            }
-            continue;
-        }
-        int mid=(l+r)/2;
-        if (cur>mid) uf=UF(n), cur=0;
-        for (; cur<=mid; cur++) {
-            uf.join(edges[cur].first, edges[cur].second);
-        }
-        auto qmid=partition(queries.begin()+ql, queries.begin()+qr, [&](Q& qu) {
-            auto& [x, y, z, _]=qu;
-            int sz;
-            if (uf.same(x, y)) sz=uf.size(x);
-            else sz=uf.size(x)+uf.size(y);
-            if (sz>=z) return true;
-            else return false;
-        })-queries.begin();
-        que.emplace(l, mid, ql, qmid);
-        que.emplace(mid+1, r, qmid, qr);
-    }
-    for (auto x : ans) cout<<x+1<<'\n';
-}
-{{< /code >}}
+    cin >> n >> m;
 
-## CTSC2008 Network 网络管理
-
-我提交的地方是个私有题库，暂时没找到公开的提交的地方。其实基本上就是动态区间第k大，只不过区间变成了树上路径，用树剖分解成多个区间就行了。
-
-{{< code language="cpp" title="代码" isCollapsed="true" >}}
-/* Author: Thallium54 {{{
- * Blog: https://blog.tgc-thallium.com/
- * Code library: https://github.com/thallium/acm-algorithm-template
- * }}}*/
-#include <bits/stdc++.h>
-using namespace std;
-template <typename T> struct fenwick {
-    int n; vector<T> t;
-    fenwick(int n_) : n(n_), t(n + 1) {}
-    void add(int i, T x) {
-        assert(i >= 0 && i < n);
-        for (i++; i <= n; i += i & -i) {
-            t[i] += x;
-        }
-    }
-    template <typename U = T> U query(int i) {
-        assert(i >= 0 && i < n);
-        U res{};
-        for (i++; i > 0; i -= i & -i)
-            res += t[i];
-        return res;
-    }
-    template <typename U = T> U query(int l, int r) {
-        assert(l >= 0 && l <= r && r < n);
-        return query<U>(r) - (l ? query<U>(l - 1) : U{});
-    }
-};
-
-struct Heavy_light {
-    vector<vector<int>> g;
-    vector<int> fa, dep, heavy, head, pos, posr; // initialize heavy with -1
-    int cnt=0;
-    fenwick<int> tr;
-    Heavy_light(int n) : g(n), fa(n), dep(n), heavy(n, -1), head(n), pos(n), posr(n), tr(n) {}
-    void add_edge(int u, int v) {
-        g[u].push_back(v);
-        g[v].push_back(u);
-    }
-    int dfs(int u) {
-        int size = 1;
-        int mx = 0;
-        for (int v : g[u]) {
-            if (v != fa[u]) {
-                fa[v] = u, dep[v] = dep[u] + 1;
-                int csize = dfs(v);
-                size += csize;
-                if (csize > mx) mx = csize, heavy[u] = v;
-            }
-        }
-        return size;
-    }
-    void dfs2(int u, int h) {
-        head[u] = h, pos[u] = cnt++; //1-based index, could change to 0 based but less useful
-        if (heavy[u] != -1) dfs2(heavy[u], h);
-        for (int v : g[u]) {
-            if (v != fa[u] && v != heavy[u])
-                dfs2(v, v);
-        }
-        posr[u] = cnt;
-    }
-    int pathsum(int u, int v) {
-        int res = 0;
-        while (head[u] != head[v]) {
-            if (dep[head[u]] < dep[head[v]]) swap(u, v);
-            res += tr.query(pos[head[u]], pos[u]);
-            u = fa[head[u]];
-        }
-        if (pos[u] > pos[v]) swap(u, v);
-        res += tr.query(pos[u], pos[v]);
-        return res;
-    }
-    void add(int u, int x) {
-        tr.add(pos[u], x);
-    }
-};
-
-struct Q {
-    int type;
-    int i, j, k, id;
-};
-
-int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    int n, q;
-    cin>>n>>q;
-    vector<int> t(n);
-    for (auto& x : t) cin>>x;
-    Heavy_light tr(n);
-    for (int i=1; i<n; i++) {
-        int u, v;
-        cin>>u>>v;
+    vector<array<int, 2>> edges(m);
+    for (auto& [u, v] : edges) {
+        cin >> u >> v;
         u--, v--;
-        tr.add_edge(u, v);
     }
-    vector<Q> qs;
-    int qc=0;
-    for (int i=0; i<n; i++) {
-        qs.push_back({0, i, 1, t[i], -1});
+
+    int q;
+    cin >> q;
+    vector<array<int, 3>> query(q);
+    for (auto& [l, r, x] : query) {
+        cin >> l >> r >> x;
+        l--, r--;
     }
-    for (int i=0; i<q; i++) {
-        int k, a, b;
-        cin>>k>>a>>b;
-        if (k==0) {
-            a--;
-            qs.push_back({0, a, -1, t[a], -1});
-            t[a]=b;
-            qs.push_back({0, a, 1, b, -1});
-        } else {
-            qs.push_back({1, a-1, b-1, k, qc++});
+
+    vector<int> l(q, 0), r(q, m - 1);
+
+    while (true) {
+        vector<vector<int>> to_check(q);
+        bool done = 1;
+        for (int i = 0; i < q; i++) {
+            if (l[i] <= r[i]) {
+                int mid = (l[i] + r[i]) / 2;
+                to_check[mid].push_back(i);
+                done = false;
+            }
+        }
+
+        if (done) {
+            break;
+        }
+
+        UF uf(n);
+        for (int i = 0; i < m; i++) {
+            uf.join(edges[i][0], edges[i][1]);
+
+            for (auto j : to_check[i]) {
+                auto [u, v, z] = query[j];
+                int sz = uf.size_of(u);
+                if (!uf.same(u, v)) {
+                    sz += uf.size_of(v);
+                }
+                if (sz >= z) {
+                    r[j] = i - 1;
+                } else {
+                    l[j] = i + 1;
+                }
+            }
         }
     }
-    vector<int> ans(qc);
-    tr.dfs(0);
-    tr.dfs2(0, 0);
-    auto solve=[&](auto& slf, int l, int r, auto begin, auto end) {
-        if (l==r || begin==end) {
-            for (auto it = begin; it!=end; ++it) {
-                if (it->type==1) ans[it->id]=l;
-            }
-            return;
-        }
-        int mid=(l+r+1)/2;
-        auto qmid = stable_partition(begin, end, [&](Q& q) {
-            auto& [type, i, j, k, id] = q;
-            if (type==1) {
-                int cnt=tr.pathsum(i, j);
-                if (cnt >= k) return false;
-                k-=cnt;
-                return true;
-            } else {
-                if (k>=mid) {
-                    tr.add(i, j);
-                    return false;
-                } else
-                    return true;
-            }
-        });
-        for (auto it = qmid; it!=end; ++it)
-            if (it->type == 0)
-                tr.add(it->i, -it->j);
-        slf(slf, l, mid-1, begin, qmid);
-        slf(slf, mid, r, qmid, end);
-    };
-    solve(solve, 0, 1e6, qs.begin(), qs.end());
-    for (auto x : ans) {
-        if (x==0) cout<<"invalid request!\n";
-        else cout<<x<<'\n';
+
+    for (auto x : l) {
+        cout << x + 1 << '\n';
     }
+    return 0;
 }
 {{< /code >}}
